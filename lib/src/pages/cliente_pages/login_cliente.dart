@@ -13,16 +13,17 @@ class LoginCliente extends StatefulWidget {
 class _LoginClienteState extends State<LoginCliente> {
   final providerCliente = ClienteProvider();
 
-  bool _cargando=false;
+  bool _cargando = false;
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc= Provider.ofClienteLogin(context);
-    Future<bool>_vaciarStream() async {
+    final loginBloc = Provider.ofClienteLogin(context);
+    Future<bool> _vaciarStream() async {
       loginBloc.changeUser("");
       loginBloc.changePassword("");
       return true;
     }
+
     return WillPopScope(
       onWillPop: _vaciarStream,
       child: Stack(
@@ -31,7 +32,7 @@ class _LoginClienteState extends State<LoginCliente> {
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              flexibleSpace: FondoClienteBar() ,
+              flexibleSpace: FondoClienteBar(),
             ),
             body: Stack(
               children: <Widget>[
@@ -86,36 +87,41 @@ class _LoginClienteState extends State<LoginCliente> {
                 height: 20,
               ),
               _crearBoton(context, bloc),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
             ],
-            
           ),
           padding: EdgeInsets.symmetric(vertical: 30.0),
           width: size.width * .85,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: Colors.white54,
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 3.0,
-                offset: Offset(0.0, 0.5),
-                spreadRadius: 3.0)
-            ]),
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white54,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 3.0,
+                    offset: Offset(0.0, 0.5),
+                    spreadRadius: 3.0)
+              ]),
         ),
         SizedBox(
           height: 20,
         ),
-        Text('¿Aún no tienes un cuenta?',
-        style: TextStyle(color: Colors.white70),),
-        RaisedButton(
-        child: Container(
-          child: Text('Registrate'),
+        Text(
+          '¿Aún no tienes un cuenta?',
+          style: TextStyle(color: Colors.white70),
         ),
-          onPressed: (){
+        ElevatedButton(
+          child: Container(
+            child: Text('Registrate'),
+          ),
+          onPressed: () {
             Navigator.pushNamed(context, 'crearCliente');
           },
-          shape: StadiumBorder(),
+          style: ElevatedButton.styleFrom(
+            shape: StadiumBorder(),
+          ),
         ),
         SizedBox(
           height: 100,
@@ -128,53 +134,59 @@ class _LoginClienteState extends State<LoginCliente> {
     return StreamBuilder(
       stream: bloc.userStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: TextField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            icon: Icon(Icons.account_circle, color: Colors.black54),
-            hintText: 'NombreUsuario',
-            labelText: 'Nombre de cliente',
-            //counterText: snapshot.data,
-            errorText: snapshot.error),
-        onChanged: bloc.changeUser));
+        return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.account_circle, color: Colors.black54),
+                    hintText: 'NombreUsuario',
+                    labelText: 'Nombre de cliente',
+                    //counterText: snapshot.data,
+                    errorText: snapshot.error),
+                onChanged: bloc.changeUser));
       },
     );
   }
 
   Widget _ingresarPassword(LoginClienteBloc bloc) {
     return StreamBuilder(
-    stream: bloc.passwordStream,
-    builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                icon: Icon(Icons.lock, color: Colors.black54),
-                labelText: 'Contraseña',
-                //counterText: snapshot.data,
-                errorText: snapshot.error),
-              onChanged: bloc.changePassword));
-    });
+        stream: bloc.passwordStream,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.lock, color: Colors.black54),
+                      labelText: 'Contraseña',
+                      //counterText: snapshot.data,
+                      errorText: snapshot.error),
+                  onChanged: bloc.changePassword));
+        });
   }
 
   Widget _crearBoton(BuildContext context, LoginClienteBloc bloc) {
     return StreamBuilder(
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return RaisedButton(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
-            child: Text('Ingresar'),
-          ),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0)),
-          elevation: 0.0,
-          color: Colors.brown,
-          textColor: Colors.white,
-          onPressed: snapshot.hasData&&_cargando==false ? () => _login(bloc, context) : null);
+        return ElevatedButton(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
+              child: Text('Ingresar'),
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+              elevation: 0.0,
+              primary: Colors.brown,
+              textStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            onPressed: snapshot.hasData && _cargando == false
+                ? () => _login(bloc, context)
+                : null);
       },
     );
   }
@@ -182,7 +194,7 @@ class _LoginClienteState extends State<LoginCliente> {
   _login(LoginClienteBloc bloc, BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
     setState(() {
-      _cargando=true;
+      _cargando = true;
     });
 
     await providerCliente.loginCliente(bloc.user, bloc.password).then((value) {
@@ -194,7 +206,7 @@ class _LoginClienteState extends State<LoginCliente> {
         bloc.changeUser('');
         bloc.changePassword('');
         // ProductosClienteBloc blocP = new ProductosClienteBloc();
-        final productosBloc= Provider.ofClienteProductos(context);
+        final productosBloc = Provider.ofClienteProductos(context);
         productosBloc.cargarProductosRecientes(id);
         //_cargando=false;
       } else {
@@ -203,7 +215,7 @@ class _LoginClienteState extends State<LoginCliente> {
     });
 
     setState(() {
-      _cargando=false;
+      _cargando = false;
     });
   }
 
@@ -218,24 +230,26 @@ class _LoginClienteState extends State<LoginCliente> {
 
   Future<void> _crearAlert(BuildContext context) {
     return showDialog<void>(
-    context: context,
-    builder: (BuildContext c) {
-      return AlertDialog(
-        title: Text(
-          'Error',
-          style: TextStyle(fontSize: 25.0),
-        ),
-        content: Text('Por favor, inténtelo de nuevo'),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Aceptar'),
-            textColor: Colors.blueAccent,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
-      );
-    });
+        context: context,
+        builder: (BuildContext c) {
+          return AlertDialog(
+            title: Text(
+              'Error',
+              style: TextStyle(fontSize: 25.0),
+            ),
+            content: Text('Por favor, inténtelo de nuevo'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Aceptar'),
+                style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all<TextStyle>(
+                        TextStyle(color: Colors.blueAccent))),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
   }
 }

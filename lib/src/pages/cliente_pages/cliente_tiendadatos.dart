@@ -98,25 +98,25 @@ class ClienteTiendaPage extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Ubicación de la Tienda', 
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Calle: ${artesanosModel.calle}', 
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Colonia: '+artesanosModel.colonia,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Referencias: '+artesanosModel.referencias,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
@@ -131,7 +131,7 @@ class ClienteTiendaPage extends StatelessWidget {
                 SizedBox(height: 20,),
                 Text(
                   'Municipio: '+ municipios.elementAt(artesanosModel.idMunicipio-1),
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 20,),
@@ -170,25 +170,25 @@ class ClienteTiendaPage extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Datos de contacto', 
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Dueño: ${artesanosModel.nombre} ${artesanosModel.apellidos}', 
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Teléfono: '+artesanosModel.celular,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
                 Text(
                   'Correo: '+artesanosModel.correo,
-                  style: Theme.of(context).textTheme.subhead,
+                  style: Theme.of(context).textTheme.subtitle1,
                   overflow: TextOverflow.clip,
                 ),
                 SizedBox(height: 20,),
@@ -210,7 +210,7 @@ class ClienteTiendaPage extends StatelessWidget {
              padding: EdgeInsets.only(left: 20.0),
              child: Text('Productos de Tienda', 
              style: TextStyle(color: Colors.black, fontStyle: FontStyle.italic),
-             //style: Theme.of(context).textTheme.subhead,
+             //style: Theme.of(context).textTheme.subtitle1,
              ),
            ),
            SizedBox(height: 2.0,),

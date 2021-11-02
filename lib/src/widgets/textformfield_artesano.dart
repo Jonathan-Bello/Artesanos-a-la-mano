@@ -20,7 +20,7 @@ class _ListaMunicipioState extends State<ListaMunicipio> {
 
         final municipios = snapshot.data;
         List<DropdownMenuItem<String>> getOpcionesDropDown(){
-          List<DropdownMenuItem<String>> lista= new List();
+          List<DropdownMenuItem<String>> lista= [];
           municipios.forEach((municipio){
               lista.add(DropdownMenuItem(
                 child: Text(municipio.nombre),

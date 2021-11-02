@@ -7,44 +7,53 @@ import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
 
 class HomePage extends StatelessWidget {
   final prefs = new PreferenciasUsuario();
+  final btnStyle = ElevatedButton.styleFrom(
+    primary: Color.fromRGBO(255, 180, 10, 0.7),
+    // primary: Colors.purple,
+    textStyle: TextStyle(
+      color: Colors.white,
+    ),
+    shape: StadiumBorder(),
+  );
+
   @override
-  
   Widget build(BuildContext context) {
-  final productosBloc= Provider.ofClienteProductos(context);
-    prefs.ultimaPagina="Home";
+    final productosBloc = Provider.ofClienteProductos(context);
+    prefs.ultimaPagina = "Home";
     return Stack(
       children: <Widget>[
         FondoCliente(),
         Scaffold(
-         backgroundColor: Colors.transparent,
-         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
-            'Artesanos a la Mano',
-            style: TextStyle(
-              color: Colors.brown, 
-              fontStyle: FontStyle.italic, 
-              wordSpacing: 5.0, fontSize: 30.0, 
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: Text(
+                'Artesanos a la Mano',
+                style: TextStyle(
+                  color: Colors.brown,
+                  fontStyle: FontStyle.italic,
+                  wordSpacing: 5.0,
+                  fontSize: 30.0,
+                ),
               ),
-            ),
-          leading: Container(
-            child: Image(image: AssetImage('assets/img/propio/rostro.png'),)
-          ),
-          centerTitle: true,
-          flexibleSpace: FondoClienteBar()
-          ),
-          
-          body:
-            SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  children: <Widget>[ 
+              leading: Container(
+                  child: Image(
+                image: AssetImage('assets/img/propio/rostro.png'),
+              )),
+              centerTitle: true,
+              flexibleSpace: FondoClienteBar()),
+          body: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: <Widget>[
                   _imagenLogo(),
                   SizedBox(height: 50.0),
-                  _butonCliente(context,productosBloc),
+                  _butonCliente(context, productosBloc),
                   SizedBox(height: 50.0),
                   _butonArtesano(context),
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                 ],
               ),
             ),
@@ -54,66 +63,53 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _imagenLogo(){
+  Widget _imagenLogo() {
     return Container(
-      padding: EdgeInsets.only(top: 30, left: 20,right: 20),
-      child: Card(
-        color: Color.fromRGBO(255, 180, 10, 0.5),
-        child: Image(
-          image: AssetImage('assets/img/propio/Logo2.png')
-        ),
-      )
-    );
+        padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+        child: Card(
+          color: Color.fromRGBO(255, 180, 10, 0.5),
+          child: Image(image: AssetImage('assets/img/propio/Logo2.png')),
+        ));
   }
-  
-  Widget _butonArtesano(BuildContext context){
-    return RaisedButton(
+
+  Widget _butonArtesano(BuildContext context) {
+    return ElevatedButton(
+      style: btnStyle,
       child: Container(
-        height: 80,
-        width: 250,
-        child: Center(
-          child: Text(
+          height: 80,
+          width: 250,
+          child: Center(
+              child: Text(
             'Ingresar como Artesano',
             style: TextStyle(
-              fontStyle: FontStyle.italic, 
+              fontStyle: FontStyle.italic,
               wordSpacing: 5.0,
-              fontSize: 20.0, 
+              fontSize: 20.0,
             ),
-          )
-        )
-      ),
-      color: Color.fromRGBO(255, 180, 10, 0.7),
-      textColor: Colors.white,
-      shape: StadiumBorder(),
-      onPressed: (){
+          ))),
+      onPressed: () {
         timeDilation = 2.0;
-        Navigator.pushNamed(
-          context, 'login'
-        );
+        Navigator.pushNamed(context, 'login');
       },
     );
   }
 
-  Widget _butonCliente(BuildContext context,ProductosClienteBloc bloc){
-    return RaisedButton(
+  Widget _butonCliente(BuildContext context, ProductosClienteBloc bloc) {
+    return ElevatedButton(
+      style: btnStyle,
       child: Container(
-        height: 80,
-        width: 250,
-        child: Center(
-          child: Text(
+          height: 80,
+          width: 250,
+          child: Center(
+              child: Text(
             'Ingresar ',
             style: TextStyle(
-              fontStyle: FontStyle.italic, 
+              fontStyle: FontStyle.italic,
               wordSpacing: 5.0,
-              fontSize: 20.0, 
+              fontSize: 20.0,
             ),
-          )
-        )
-      ),
-      color: Color.fromRGBO(255, 180, 10, 0.7),
-      textColor: Colors.white,
-      shape: StadiumBorder(),
-      onPressed: (){
+          ))),
+      onPressed: () {
         //bloc.cargarProductosRecientes();
         Navigator.pushNamed(context, 'loginCliente');
       },

@@ -24,7 +24,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
   ClienteBloc clienteBloc;
 
   final formKey = GlobalKey<FormState>();
-  final scaffoldKey= GlobalKey<ScaffoldState>();
+  final scaffoldKey= GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -283,17 +283,19 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
   }
 
   Widget _crearBoton() {
-  return RaisedButton(
+  return ElevatedButton(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
         child: Text('Agregar'),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5.0),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        elevation: 0.0,
+        primary: Colors.deepPurple,
+        textStyle: TextStyle(color: Colors.white),
       ),
-      elevation: 0.0,
-      color: Colors.deepPurple,
-      textColor: Colors.white,
       // onPressed: _sumbit
       onPressed:_cargando ? null : _sumbit,
   );

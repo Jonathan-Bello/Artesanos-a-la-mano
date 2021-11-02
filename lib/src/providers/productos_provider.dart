@@ -52,7 +52,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -137,7 +137,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -158,7 +158,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -178,7 +178,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -199,7 +199,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -220,7 +220,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -240,7 +240,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -289,7 +289,7 @@ class ProductosProvider {
 
     if(decodedData.isEmpty) return 0;
 
-    final List<dynamic> like = new List();
+    final List<dynamic> like = [];
     //print(decodedData);
     // return 1;
     decodedData.forEach( (item){
@@ -309,7 +309,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -329,7 +329,7 @@ class ProductosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    //final List<ProductoModel> productos = new List();
+    //final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData.isEmpty) return 2;

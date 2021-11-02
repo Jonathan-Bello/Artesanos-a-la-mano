@@ -46,12 +46,12 @@ class ArtesanoProvider {
   //Artesanos por Region
   Future<List<ArtesanosModel>> getArtesanoRegion(int region) async{
     final url = Uri.https(_url, 'Artesanos/GetArtesanosPorRegion.php', {
-     'region'  : region.toString(),                                                 
+     'region'  : region.toString(),
     });
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ArtesanosModel> artesanos = new List();
+    final List<ArtesanosModel> artesanos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -66,12 +66,12 @@ class ArtesanoProvider {
   //Artesanos por municipio
   Future<List<ArtesanosModel>> getArtesanoMunicipio(int municipio) async{
     final url = Uri.https(_url, 'Artesanos/GetArtesanoPorMunicipio.php', {
-     'idmunicipio'  : municipio.toString(),                                                 
+     'idmunicipio'  : municipio.toString(),
     });
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ArtesanosModel> artesanos = new List();
+    final List<ArtesanosModel> artesanos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -92,7 +92,7 @@ class ArtesanoProvider {
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
     print(decodedData);
-    final List<MunicipioModel> municipios = new List();
+    final List<MunicipioModel> municipios = [];
     //print(decodedData);
 
     decodedData.forEach( (item){
@@ -108,7 +108,7 @@ class ArtesanoProvider {
     final url = Uri.https(_url, 'Municipios/GetMunicipios.php', {});
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<MunicipioModel> municipios = new List();
+    final List<MunicipioModel> municipios = [];
     //print(decodedData);
 
     if(decodedData==null) return [];

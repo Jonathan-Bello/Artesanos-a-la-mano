@@ -13,5 +13,4 @@ final miTemaA = ThemeData(
       color: Colors.brown
     )
   ),
-  cursorColor: Colors.brown,
 );

@@ -13,7 +13,7 @@ class PeliculasProvider{
   //int _popularesPage = 0;
   bool _cargando=false;
 
-  List<ProductoModel> _populares= new List();
+  List<ProductoModel> _populares= [];
 
   final _popularesStreamController= StreamController<List<ProductoModel>>.broadcast();
 
@@ -29,7 +29,7 @@ class PeliculasProvider{
     final response= await http.get(url);
 
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<ProductoModel> productos = new List();
+    final List<ProductoModel> productos = [];
     //print(decodedData);
 
     if(decodedData==null) return [];

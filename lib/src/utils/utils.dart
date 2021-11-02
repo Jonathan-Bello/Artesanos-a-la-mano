@@ -15,7 +15,7 @@ void mostrarAlerta(BuildContext context, String mensaje ) {
         title: Text('Error'),
         content: Text(mensaje),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text('Ok'),
             onPressed: ()=> Navigator.of(context).pop(),
           )
@@ -86,13 +86,13 @@ void mostrarPoliticaPrivacidad(BuildContext context){
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     child: Text('Privacy policies'),
                     onPressed: (){
                       Navigator.of(context).pushNamed('PoliticasPages');
                     } 
                   ),
-                  FlatButton(
+                  TextButton(
                     child: Text('Close'),
                     onPressed: ()=> Navigator.of(context).pop(),
                   )

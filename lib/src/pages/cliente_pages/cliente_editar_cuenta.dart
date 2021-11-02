@@ -21,7 +21,7 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
 
   final formKey = GlobalKey<FormState>();
 
-  final scaffoldKey= GlobalKey<ScaffoldState>();
+  final scaffoldKey= GlobalKey<ScaffoldMessengerState>();
 
   final prefs = new PreferenciasUsuario();
 
@@ -188,12 +188,16 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
   }
 
   Widget _crearBoton(){
-    return RaisedButton.icon(
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0)
       ),
-      color: Colors.brown,
-      textColor: Colors.white,
+      primary: Colors.brown,
+      textStyle: TextStyle(
+        color: Colors.white,
+      ),
+      ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
       onPressed:_guardando ? null : _sumbit,
@@ -227,7 +231,6 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
       Navigator.pop(context);
     });
     });
-    
   }
 
   void mostrarSnackbar(String mensaje){

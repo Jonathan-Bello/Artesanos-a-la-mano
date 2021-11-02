@@ -13,7 +13,7 @@ class MunicipiosProvider {
     print(url);
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<MunicipioModel> muncipios = new List();
+    final List<MunicipioModel> muncipios = [];
     //print(decodedData);
 
     if(decodedData==null) return [];
@@ -34,7 +34,7 @@ class MunicipiosProvider {
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
     print(decodedData);
-    final List<MunicipioModel> municipios = new List();
+    final List<MunicipioModel> municipios = [];
     //print(decodedData);
 
     decodedData.forEach( (item){
@@ -51,7 +51,7 @@ class MunicipiosProvider {
     final url = Uri.https(_url, 'Municipios/GetMunicipios.php', {});
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
-    final List<MunicipioModel> municipios = new List();
+    final List<MunicipioModel> municipios = [];
     //print(decodedData);
 
     if(decodedData==null) return [];

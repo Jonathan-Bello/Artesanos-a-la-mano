@@ -158,8 +158,8 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
       },
       type: BottomNavigationBarType.fixed,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.store_mall_directory,),title: Text('Tiendas')),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_basket, ),title: Text('Productos'))
+        BottomNavigationBarItem(icon: Icon(Icons.store_mall_directory,),label: 'Tiendas'),
+        BottomNavigationBarItem(icon: Icon(Icons.shopping_basket, ),label: 'Productos')
       ]
     );
   }
