@@ -120,7 +120,6 @@ class DataSearch extends SearchDelegate {
       future: productosProvider.getProductosBusqueda(query,prefs.idCliente),
       builder: (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot) {
           if( snapshot.hasData ) {
-            
             productos = snapshot.data;
 
 

@@ -8,7 +8,7 @@ class ClienteBloc{
   final _clienteProvider = new ClienteProvider();
 
   final _cargandoController = new BehaviorSubject<bool>();
-  
+
   final _clienteController = new BehaviorSubject<ClienteModel>();
   Stream<ClienteModel> get clienteStream => _clienteController.stream;
   Function(ClienteModel) get chanceClienteStream => _clienteController.sink.add;
