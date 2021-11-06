@@ -1,6 +1,7 @@
 import 'package:artesanos_a_la_mano/src/bloc/cliente_blocs/cliente_bloc.dart';
 import 'package:artesanos_a_la_mano/src/models/cliente_model.dart';
 import 'package:artesanos_a_la_mano/src/providers/cliente_provider.dart';
+import 'package:artesanos_a_la_mano/src/theme/tema.dart';
 import 'package:artesanos_a_la_mano/src/utils/utils.dart' as utils;
 import 'package:artesanos_a_la_mano/src/utils/utils.dart';
 import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
@@ -14,8 +15,7 @@ class RegistrarCliente extends StatefulWidget {
 
 class _RegistrarClienteState extends State<RegistrarCliente> {
   ClienteModel cliente = new ClienteModel();
-  bool _cargando=false;
-
+  bool _cargando = false;
 
   ClienteProvider clienteProvider;
 
@@ -24,7 +24,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
   ClienteBloc clienteBloc;
 
   final formKey = GlobalKey<FormState>();
-  final scaffoldKey= GlobalKey<ScaffoldMessengerState>();
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,6 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
           key: scaffoldKey,
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text(
-              'VALORARTE MÉXICO-PUEBLA',
-              style: TextStyle(
-                color: Colors.brown,
-                fontStyle: FontStyle.italic,
-                wordSpacing: 0.0,
-                fontSize: 20.0,
-              ),
-            ),
-            centerTitle: true,
             flexibleSpace: FondoClienteBar(),
           ),
           body: _loginForm(context),
@@ -60,21 +50,22 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
       child: Column(
         children: <Widget>[
           SafeArea(
-              child: Container(
-            height: 50.0,
-          )),
+            child: Container(
+              height: 50.0,
+            ),
+          ),
           Container(
-            width: size.width * 0.80,
-            padding: EdgeInsets.symmetric(vertical: 50.0),
-            margin: EdgeInsets.symmetric(vertical: 30.0),
+            width: size.width * 0.85,
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            // margin: EdgeInsets.symmetric(vertical: 5.0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Colors.black12,
+                    color: Colors.black26,
                     blurRadius: 3.0,
-                    offset: Offset(0.0, 5.0),
+                    offset: Offset(0.0, 0.5),
                     spreadRadius: 3.0,
                   )
                 ]),
@@ -83,8 +74,15 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    Text('    Bienvenid@ \nIngresa tus datos',
-                        style: TextStyle(fontSize: 20.0)),
+                    Text(
+                      'Para registrarte \nIngresa tus datos',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 30.0,
+                      ),
+                    ),
                     SizedBox(
                       height: 60.0,
                     ),
@@ -136,7 +134,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
           initialValue: cliente.nombre,
           maxLines: 1,
           decoration: InputDecoration(
-            icon: Icon(Icons.person_pin, color: Colors.deepPurple),
+            icon: Icon(Icons.person_pin, color: miTemaA.primaryColor),
             labelText: 'Nombre',
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -165,12 +163,11 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
             maxLength: 50,
             maxLines: 1,
             decoration: InputDecoration(
-              icon: Icon(Icons.person_outline, color: Colors.deepPurple),
+              icon: Icon(Icons.person_outline, color: miTemaA.primaryColor),
               labelText: 'Apellidos',
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(color: Colors.brown, width: 2)),
-              
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.brown, width: 2)),
             ),
             validator: (value) {
               if (value.length < 0)
@@ -193,13 +190,12 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
         initialValue: cliente.correo,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-          icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
+          icon: Icon(Icons.alternate_email, color: miTemaA.primaryColor),
           hintText: 'ejemplo@correo.com',
           labelText: 'Correo electrónico',
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.brown, width: 2)
-          ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.brown, width: 2)),
         ),
         // onChanged: bloc.changeCorreo,
         onSaved: (value) => cliente.correo = value,
@@ -211,16 +207,15 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
-        initialValue: cliente.celular.toString(),
         maxLength: 10,
         maxLines: 1,
         keyboardType: TextInputType.numberWithOptions(),
         decoration: InputDecoration(
-          icon: Icon(Icons.phone, color: Colors.deepPurple),
+          icon: Icon(Icons.phone, color: miTemaA.primaryColor),
           labelText: 'Celular',
           border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(color: Colors.brown, width: 2)),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.brown, width: 2)),
         ),
         validator: (value) {
           if (utils.isNumeric(value) && value.length == 10)
@@ -239,11 +234,11 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
       child: TextFormField(
         initialValue: cliente.usuario,
         decoration: InputDecoration(
-          icon: Icon(Icons.person_add, color: Colors.deepPurple),
+          icon: Icon(Icons.person_add, color: miTemaA.primaryColor),
           labelText: 'Nombre de usuario',
           border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(color: Colors.brown, width: 2)),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.brown, width: 2)),
         ),
         validator: (value) {
           if (value.length > 3)
@@ -264,11 +259,11 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
         initialValue: cliente.contrasea,
         obscureText: true,
         decoration: InputDecoration(
-          icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
+          icon: Icon(Icons.lock_outline, color: miTemaA.primaryColor),
           labelText: 'Contraseña',
           border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(color: Colors.brown, width: 2)),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.brown, width: 2)),
         ),
         validator: (value) {
           if (value.length > 4)
@@ -283,22 +278,14 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
   }
 
   Widget _crearBoton() {
-  return ElevatedButton(
+    return ElevatedButton(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
         child: Text('Agregar'),
       ),
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        elevation: 0.0,
-        primary: Colors.deepPurple,
-        textStyle: TextStyle(color: Colors.white),
-      ),
       // onPressed: _sumbit
-      onPressed:_cargando ? null : _sumbit,
-  );
+      onPressed: _cargando ? null : _sumbit,
+    );
   }
 
   void _sumbit() async {
@@ -308,36 +295,36 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
     formKey.currentState.save();
 
     setState(() {
-      _cargando=true;
+      _cargando = true;
     });
 
     final clienteProvider = new ClienteProvider();
-    await clienteProvider.nuevoCliente(cliente).then((value){
+    await clienteProvider.nuevoCliente(cliente).then((value) {
       String estatus = value['Estatus'];
       String mensaje = value['Mensaje'];
-      if(estatus=='500'){
+      if (estatus == '500') {
         setState(() {
-          _cargando=false;
+          _cargando = false;
         });
-        return mostrarAlerta(context,mensaje);
-      }else{
-        if(estatus!='200'){
-        setState(() {
-          _cargando=false;
-        });
-        return mostrarAlerta(context,'Algo salio mal, intentelo de nuevo');
+        return mostrarAlerta(context, mensaje);
+      } else {
+        if (estatus != '200') {
+          setState(() {
+            _cargando = false;
+          });
+          return mostrarAlerta(context, 'Algo salio mal, intentelo de nuevo');
+        }
       }
-      }
-      if(estatus=='200'){
+      if (estatus == '200') {
         setState(() {
           //_cargando=false;
           mostrarSnackbar('Guardando información');
           Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pop(context);
-        });
+            Navigator.pop(context);
+          });
         });
       }
-    });  
+    });
   }
 
   void imprimir() {
@@ -350,10 +337,10 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
     return print(cliente.toJson());
   }
 
-  void mostrarSnackbar(String mensaje){
+  void mostrarSnackbar(String mensaje) {
     final snackbar = new SnackBar(
       content: Text(mensaje),
-      duration: Duration( milliseconds: 1500 ),
+      duration: Duration(milliseconds: 1500),
       // action: SnackBarAction(
       //   label: 'VOLVER',
       //   onPressed: () => Navigator.pop(context, 'MenuArtesano')

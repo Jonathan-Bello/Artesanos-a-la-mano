@@ -1,3 +1,4 @@
+import 'package:artesanos_a_la_mano/src/widgets/pinterest_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
 import 'package:artesanos_a_la_mano/src/bloc/municipios_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:artesanos_a_la_mano/src/widgets/card_swiper_widget.dart';
 import 'package:artesanos_a_la_mano/src/widgets/drawer_cliente.dart';
 import 'package:artesanos_a_la_mano/src/widgets/productos_horizontal.dart';
 import 'package:artesanos_a_la_mano/src/search/search_delegate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ClienteHome extends StatelessWidget {
   //const ClienteHome({Key key}) : super(key: key);
@@ -17,25 +19,17 @@ class ClienteHome extends StatelessWidget {
 
   final prefs = new PreferenciasUsuario();
 
-  final btnStyle = ElevatedButton.styleFrom(
-    primary: Colors.brown,
-    textStyle: TextStyle(color: Colors.white),
-    elevation: 20,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+  final btnStyle = ButtonStyle(
+    alignment: Alignment.center,
   );
 
   @override
   Widget build(BuildContext context) {
     prefs.ultimaPagina = "ClienteHome";
-    // print(prefs.idCliente.toString());
-    // timeDilation = 1.0;
+    final municipiosBloc = Provider.ofMunicipios(context);
     final productosBloc = Provider.ofClienteProductos(context);
     productosBloc.cargarProductosRecientes(prefs.idCliente);
     productosBloc.cargarProductosAleatorios(3, prefs.idCliente);
-
-    final municipiosBloc = Provider.ofMunicipios(context);
-    // final productosBloc= Provider.ofProduc(context);
-    // productosBloc.cargarProductos(1,3);
 
     Future<bool> _vaciarStream() async {
       productosBloc.changeStreamRecientes(null);
@@ -44,7 +38,7 @@ class ClienteHome extends StatelessWidget {
     }
 
     return WillPopScope(
-      onWillPop: _vaciarStream, //_vaciarStream,
+      onWillPop: _vaciarStream,
       child: Stack(
         children: <Widget>[
           FondoCliente(),
@@ -56,7 +50,7 @@ class ClienteHome extends StatelessWidget {
               title: Text(
                 'Inicio',
                 style: TextStyle(
-                  color: Colors.brown,
+                  // color: Colors.brown,
                   fontStyle: FontStyle.italic,
                   wordSpacing: 5.0,
                   fontSize: 30.0,
@@ -69,43 +63,23 @@ class ClienteHome extends StatelessWidget {
                   onPressed: () {
                     showSearch(context: context, delegate: DataSearch());
                   },
-                  icon: Icon(Icons.search, color: Colors.brown),
+                  icon: Icon(Icons.search),
                 )
               ],
             ),
             body: SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      // snipperProductos(productosBloc),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      footer(productosBloc),
-                      //ffooter(context),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      categorias(context, productosBloc),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      //snipperProductosF(),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      regiones(context, municipiosBloc),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      snipperProductos(productosBloc),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+              child: Column(
+                children: [
+                  footer(productosBloc),
+                  categorias(context, productosBloc),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    child: CrearPinterestGrid(),
                   ),
-                ),
+                  regiones(context, municipiosBloc),
+                  snipperProductos(productosBloc),
+                ],
               ),
             ),
           ),
@@ -115,19 +89,22 @@ class ClienteHome extends StatelessWidget {
   }
 
   Widget snipperProductos(ProductosClienteBloc bloc) {
-    return StreamBuilder(
-      stream: bloc.productosAleatorios,
-      builder:
-          (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot) {
-        if (snapshot.hasData) {
-          List<ProductoModel> productos = snapshot.data;
-          return CardSwiper(
-            productos: productos,
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
+    return Container(
+      margin: EdgeInsets.only(bottom: 20.0),
+      child: StreamBuilder(
+        stream: bloc.productosAleatorios,
+        builder: (BuildContext context,
+            AsyncSnapshot<List<ProductoModel>> snapshot) {
+          if (snapshot.hasData) {
+            List<ProductoModel> productos = snapshot.data;
+            return CardSwiper(
+              productos: productos,
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 
@@ -155,14 +132,14 @@ class ClienteHome extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 20.0),
+            padding: EdgeInsets.only(left: 20.0, top: 20.0),
             child: Text(
               'Recientes',
               style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20),
-              //style: Theme.of(context).textTheme.subtitle1,
+                color: Colors.black,
+                fontStyle: FontStyle.italic,
+                fontSize: 22,
+              ),
             ),
           ),
           SizedBox(
@@ -181,9 +158,10 @@ class ClienteHome extends StatelessWidget {
                 );
               } else {
                 return Center(
-                    child: CircularProgressIndicator(
-                  backgroundColor: Colors.amber,
-                ));
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.amber,
+                  ),
+                );
               }
             },
           ),
@@ -203,7 +181,7 @@ class ClienteHome extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 10,
-            color: Colors.white38,
+            color: Colors.black,
             padding: EdgeInsets.only(left: 20.0),
           ),
           Container(
@@ -211,9 +189,10 @@ class ClienteHome extends StatelessWidget {
             child: Text(
               'Lo nuevo',
               style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20),
+                color: Colors.black,
+                fontStyle: FontStyle.italic,
+                fontSize: 20,
+              ),
             ),
           ),
           SizedBox(
@@ -250,23 +229,26 @@ class ClienteHome extends StatelessWidget {
   Widget categorias(BuildContext context, ProductosClienteBloc bloc) {
     final size = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.only(top: 15.0, bottom: 10.0),
       padding: EdgeInsets.symmetric(vertical: 30.0),
-      width: size.width * .85,
+      width: size.width * .90,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.white54,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 3.0,
-                offset: Offset(0.0, 0.5),
-                spreadRadius: 3.0)
-          ]),
+        borderRadius: BorderRadius.circular(5.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 3.0,
+            offset: Offset(0.0, 0.5),
+            spreadRadius: 3.0,
+          ),
+        ],
+      ),
       child: Column(
         children: <Widget>[
           Center(
             child: Text(
-              'Categorías ',
+              'Categorías',
               style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic),
             ),
           ),
@@ -274,9 +256,13 @@ class ClienteHome extends StatelessWidget {
             height: 20,
           ),
           categoriasBoton(context, bloc),
-          ElevatedButton(
-              child: Container(
-                child: Center(child: Text('Varios')),
+          ElevatedButton.icon(
+              icon: Icon(FontAwesomeIcons.gift),
+              label: Container(
+                child: Text(
+                  'Varios',
+                  textAlign: TextAlign.center,
+                ),
                 width: 100,
               ),
               style: btnStyle,
@@ -296,54 +282,48 @@ class ClienteHome extends StatelessWidget {
       children: <Widget>[
         Column(
           children: <Widget>[
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Cerámica')),
+            ElevatedButton.icon(
+                icon: Icon(Icons.free_breakfast),
+                label: Container(
+                  child: Text(
+                    'Cerámica',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Cerámica', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Cerámica');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Madera')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.tree),
+                label: Container(
+                  child: Text(
+                    'Madera',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Madera', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Madera');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Mármol, Piedra y Vidrio')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.glassMartini),
+                label: Container(
+                  child: Text(
+                    'Mármol, Piedra y Vidrio',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria(
                       'Mármol, Piedra y Vidrio', prefs.idCliente);
@@ -351,18 +331,16 @@ class ClienteHome extends StatelessWidget {
                       arguments: 'Mármol, Piedra y Vidrio');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Metal')),
+            ElevatedButton.icon(
+                icon: Icon(Icons.watch),
+                label: Container(
+                  child: Text(
+                    'Metal',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Metal', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
@@ -372,40 +350,36 @@ class ClienteHome extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: 40,
+          width: 20,
         ),
         Column(
           children: <Widget>[
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Barro')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.mortarPestle),
+                label: Container(
+                  child: Text(
+                    'Barro',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Barro', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Barro');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Piel y Cuero')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.horse),
+                label: Container(
+                  child: Text(
+                    'Piel y Cuero',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria(
                       'Piel y Cuero', prefs.idCliente);
@@ -413,36 +387,32 @@ class ClienteHome extends StatelessWidget {
                       arguments: 'Piel y Cuero');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Textil')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.tshirt),
+                label: Container(
+                  child: Text(
+                    'Textil',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Textil', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Textil');
                 }),
             SizedBox(height: 5),
-            ElevatedButton(
-                child: Container(
-                  child: Center(child: Text('Joyería')),
+            ElevatedButton.icon(
+                icon: Icon(FontAwesomeIcons.sketch),
+                label: Container(
+                  child: Text(
+                    'Joyería',
+                    textAlign: TextAlign.center,
+                  ),
                   width: 100,
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.brown,
-                  textStyle: TextStyle(color: Colors.white),
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                ),
+                style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria('Joyería', prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
@@ -458,30 +428,27 @@ class ClienteHome extends StatelessWidget {
   Widget regiones(BuildContext context, MunicipiosBloc bloc) {
     final size = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.only(bottom: 20.0),
       padding: EdgeInsets.symmetric(vertical: 30.0),
       width: size.width * .85,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.white54,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black26,
-                blurRadius: 3.0,
-                offset: Offset(0.0, 0.5),
-                spreadRadius: 3.0)
-          ]),
+        borderRadius: BorderRadius.circular(5.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.black26,
+              blurRadius: 3.0,
+              offset: Offset(0.0, 0.5),
+              spreadRadius: 3.0)
+        ],
+      ),
       child: Column(
         children: <Widget>[
           Center(
             child: Text(
-              'Búsqueda por ',
+              'Búsqueda por\n Regiones',
               style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic),
-            ),
-          ),
-          Center(
-            child: Text(
-              'Regiones ',
-              style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic),
+              textAlign: TextAlign.center,
             ),
           ),
           SizedBox(
@@ -490,8 +457,12 @@ class ClienteHome extends StatelessWidget {
           regionesBoton(context, bloc),
           ElevatedButton(
               child: Container(
-                child: Center(child: Text('VII - Tehuacán Y Sierra Negra')),
-                width: 100,
+                child: Center(
+                    child: Text(
+                  'VII - Tehuacán Y Sierra Negra',
+                  textAlign: TextAlign.center,
+                )),
+                width: 110,
               ),
               style: btnStyle,
               onPressed: () {
@@ -511,8 +482,12 @@ class ClienteHome extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
                 child: Container(
-                  child: Center(child: Text('I-Huauchinango')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'I - Huauchinango',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 style: btnStyle,
                 onPressed: () {
@@ -523,8 +498,12 @@ class ClienteHome extends StatelessWidget {
             SizedBox(height: 5),
             ElevatedButton(
                 child: Container(
-                  child: Center(child: Text('III - Ciudad Serdán')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'III - Ciudad Serdán',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 style: btnStyle,
                 onPressed: () {
@@ -535,8 +514,12 @@ class ClienteHome extends StatelessWidget {
             SizedBox(height: 5),
             ElevatedButton(
                 child: Container(
-                  child: Center(child: Text('V - Puebla')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'V - Puebla',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 style: btnStyle,
                 onPressed: () {
@@ -548,14 +531,18 @@ class ClienteHome extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: 40,
+          width: 20,
         ),
         Column(
           children: <Widget>[
             ElevatedButton(
                 child: Container(
-                  child: Center(child: Text('II-Teziutlán')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'II-Teziutlán',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 style: btnStyle,
                 onPressed: () {
@@ -567,8 +554,12 @@ class ClienteHome extends StatelessWidget {
             ElevatedButton(
                 style: btnStyle,
                 child: Container(
-                  child: Center(child: Text('IV - San Pedro Cholula')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'IV - San Pedro Cholula',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 onPressed: () {
                   bloc.cargarMuncipiosRegion(4);
@@ -579,8 +570,12 @@ class ClienteHome extends StatelessWidget {
             ElevatedButton(
                 style: btnStyle,
                 child: Container(
-                  child: Center(child: Text('VI - Izúcar De Matamoros')),
-                  width: 100,
+                  child: Center(
+                      child: Text(
+                    'VI - Izúcar De Matamoros',
+                    textAlign: TextAlign.center,
+                  )),
+                  width: 110,
                 ),
                 onPressed: () {
                   bloc.cargarMuncipiosRegion(6);

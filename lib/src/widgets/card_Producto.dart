@@ -240,7 +240,7 @@ class CardProductoShow extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            "   Nombre: " + producto.producto,
+                            "Nombre: " + producto.producto,
                             overflow: TextOverflow.clip,
                           ),
                           SizedBox(
