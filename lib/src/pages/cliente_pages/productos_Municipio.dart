@@ -8,66 +8,70 @@ import 'package:flutter/material.dart';
 
 class ListadoProductosMunicipio extends StatelessWidget {
   //const ListadoCategoria({Key key}) : super(key: key);
-  final productosProvider= new ProductosProvider();
+  final productosProvider = new ProductosProvider();
   @override
   Widget build(BuildContext context) {
-
-    final String idMunicipio= ModalRoute.of(context).settings.arguments;
-    final productosBloc= Provider.ofClienteProductos(context);
+    final String idMunicipio = ModalRoute.of(context).settings.arguments;
+    final productosBloc = Provider.ofClienteProductos(context);
     // productosBloc.cargarProductosCategoria(categoria);
-    Future<bool>_vaciarStream() async {
+    Future<bool> _vaciarStream() async {
       productosBloc.changeStreamMunicipio(null);
       return true;
     }
+
     return WillPopScope(
       onWillPop: _vaciarStream,
       child: Stack(
         children: <Widget>[
           FondoCliente(),
           Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              flexibleSpace: FondoClienteBar(),
-              centerTitle: true,
-              title: Text(''+idMunicipio.toString(),
-                style: TextStyle(
-                color: Colors.brown, 
-                fontStyle: FontStyle.italic, 
-                wordSpacing: 5.0, fontSize: 25.0, 
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                flexibleSpace: FondoClienteBar(),
+                centerTitle: true,
+                title: Text(
+                  '' + idMunicipio.toString(),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    wordSpacing: 5.0,
+                    fontSize: 25.0,
+                  ),
                 ),
               ),
-            ),
-            body:
-            _crearListadoStream(productosBloc)
-            //_crearListado(categoria),
-          )
+              body: _crearListadoStream(productosBloc)
+              //_crearListado(categoria),
+              )
         ],
       ),
     );
   }
 
-  Widget _crearListadoStream(ProductosClienteBloc bloc){
+  Widget _crearListadoStream(ProductosClienteBloc bloc) {
     return StreamBuilder(
       stream: bloc.productosMunicipio,
-      builder: (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot){
-        if(snapshot.hasData){
-        final productos = snapshot.data;
-        return ListView.builder(
-          itemCount: productos.length,
-          itemBuilder: (BuildContext context, int index) {
-          return  _crearItem(context,productos[index]);
-          },
-        );
-        }else{
+      builder:
+          (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot) {
+        if (snapshot.hasData) {
+          final productos = snapshot.data;
+          return ListView.builder(
+            itemCount: productos.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _crearItem(context, productos[index]);
+            },
+          );
+        } else {
           return Center(
-            child: CircularProgressIndicator(backgroundColor: Colors.amber,),
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.amber,
+            ),
           );
         }
       },
     );
   }
 
-  Widget _crearItem(BuildContext context, ProductoModel producto){
-    return CardProductoShow(producto: producto,ruta: 'ProductoDetalle');
+  Widget _crearItem(BuildContext context, ProductoModel producto) {
+    return CardProductoShow(producto: producto, ruta: 'ProductoDetalle');
   }
 }

@@ -7,7 +7,6 @@ import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:artesanos_a_la_mano/src/utils/utils.dart' as utils;
 
-
 class EditarCuentaPage extends StatefulWidget {
   // const EditarCuentaPage({Key key}) : super(key: key);
   @override
@@ -21,7 +20,7 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
 
   final formKey = GlobalKey<FormState>();
 
-  final scaffoldKey= GlobalKey<ScaffoldMessengerState>();
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   final prefs = new PreferenciasUsuario();
 
@@ -29,65 +28,65 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc= Provider.ofCliente(context);
+    final bloc = Provider.ofCliente(context);
     cliente = bloc.getcliente;
-    return Stack(
-      children: <Widget>[
+    return Stack(children: <Widget>[
       FondoCliente(),
-        Scaffold(
-          key: scaffoldKey,
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            flexibleSpace: FondoClienteBar(),
-            title: Text('Editar Cuenta',
-              style: TextStyle(
-              color: Colors.brown, 
-              fontStyle: FontStyle.italic, 
-              wordSpacing: 5.0, fontSize: 30.0, 
-              ),
+      Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          flexibleSpace: FondoClienteBar(),
+          title: Text(
+            'Editar Cuenta',
+            style: TextStyle(
+              color: Colors.white,
+              fontStyle: FontStyle.italic,
+              wordSpacing: 5.0,
+              fontSize: 30.0,
             ),
-            centerTitle: true,
+          ),
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
-            child: form(),
+          child: form(),
         ),
-        )
-      ]
+      )
+    ]);
+  }
+
+  Widget form() {
+    // final _screenSize= MediaQuery.of(context).size;
+    final blocValidation = Provider.ofValitation(context);
+    return Container(
+      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.only(top: 100),
+      child: Form(
+        key: formKey,
+        child: Container(
+          color: Colors.white54,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              Text("Datos de Personales", style: TextStyle(fontSize: 20)),
+              SizedBox(height: 10),
+              _txtFormNombre(),
+              SizedBox(height: 5),
+              _txtFormApellidos(),
+              SizedBox(height: 5),
+              _txtFormTelefono(),
+              SizedBox(height: 5),
+              _crearEmail(blocValidation),
+              SizedBox(height: 5),
+              _crearBoton(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
-  Widget form(){
-    // final _screenSize= MediaQuery.of(context).size;
-    final blocValidation= Provider.ofValitation(context);
-    return Container(
-    padding: EdgeInsets.all(15),
-    margin: EdgeInsets.only(top:100),
-    child: Form(
-      key: formKey,
-      child: Container(
-        color: Colors.white54,
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            Text("Datos de Personales",style: TextStyle(fontSize: 20)),
-            SizedBox(height: 10),
-            _txtFormNombre(),
-            SizedBox(height: 5),
-            _txtFormApellidos(),
-            SizedBox(height: 5),
-            _txtFormTelefono(),
-            SizedBox(height: 5),
-            _crearEmail(blocValidation),
-            SizedBox(height: 5),
-            _crearBoton(),
-          ],
-        ),
-      ),
-    ),
-  );
-  }
-
-   Widget _txtFormNombre(){
+  Widget _txtFormNombre() {
     return TextFormField(
       initialValue: cliente.nombre,
       textCapitalization: TextCapitalization.sentences,
@@ -95,22 +94,21 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
       decoration: InputDecoration(
         labelText: 'Nombres',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.brown,width: 2)
-        ),
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.brown, width: 2)),
       ),
-      validator: (value){
-        if(value.isEmpty){
+      validator: (value) {
+        if (value.isEmpty) {
           return 'Debe ingresar nombre su nombre o nombres';
-        }else{
+        } else {
           return null;
         }
       },
-      onSaved: (value)=> cliente.nombre = value ,
+      onSaved: (value) => cliente.nombre = value,
     );
   }
 
-  Widget _txtFormApellidos(){
+  Widget _txtFormApellidos() {
     return TextFormField(
       initialValue: cliente.apellido,
       textCapitalization: TextCapitalization.sentences,
@@ -118,22 +116,21 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
       decoration: InputDecoration(
         labelText: 'Apellidos',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.brown,width: 2)
-        ),
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.brown, width: 2)),
       ),
-      validator: (value){
-        if(value.isEmpty){
+      validator: (value) {
+        if (value.isEmpty) {
           return 'Debe ingresar nombre sus apellidos';
-        }else{
+        } else {
           return null;
         }
       },
-      onSaved: (value)=> cliente.apellido = value ,
+      onSaved: (value) => cliente.apellido = value,
     );
   }
 
-  Widget _txtFormTelefono(){
+  Widget _txtFormTelefono() {
     return TextFormField(
       initialValue: cliente.celular.toString(),
       keyboardType: TextInputType.numberWithOptions(),
@@ -141,84 +138,73 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
       decoration: InputDecoration(
         labelText: 'Telefono o Celular',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: Colors.brown,width: 2)
-        ),
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.brown, width: 2)),
       ),
-      validator: (value){
-        if ( utils.isNumeric(value)  && value.length==10) {
+      validator: (value) {
+        if (utils.isNumeric(value) && value.length == 10) {
           return null;
         } else {
           return 'Debe ingresar un numero telefonico valido';
         }
       },
-      onSaved: (value)=> cliente.celular = int.parse(value) ,
+      onSaved: (value) => cliente.celular = int.parse(value),
     );
   }
 
-  Widget _crearEmail(ValidationBloc bloc){
+  Widget _crearEmail(ValidationBloc bloc) {
     return StreamBuilder(
-      stream: bloc.emailStream ,
-      builder: (BuildContext context, AsyncSnapshot snapshot){
+      stream: bloc.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         return TextFormField(
-        initialValue: cliente.correo,
-        keyboardType: TextInputType.emailAddress,
-        maxLength: 40,
-        decoration: InputDecoration(
-          labelText: 'Email',
-          counterText: snapshot.data,
-          errorText: snapshot.error,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.brown,width: 2)
+          initialValue: cliente.correo,
+          keyboardType: TextInputType.emailAddress,
+          maxLength: 40,
+          decoration: InputDecoration(
+            labelText: 'Email',
+            counterText: snapshot.data,
+            errorText: snapshot.error,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(color: Colors.brown, width: 2)),
           ),
-        ),
-        validator: (value){
-          if(snapshot.error!=null){
-            return 'El email no es valido';
-          }else{
-            return null;
-          }
-        },
-        onChanged: bloc.changeEmail,
-        onSaved: (value)=> cliente.correo = value ,
-      );
+          validator: (value) {
+            if (snapshot.error != null) {
+              return 'El email no es valido';
+            } else {
+              return null;
+            }
+          },
+          onChanged: bloc.changeEmail,
+          onSaved: (value) => cliente.correo = value,
+        );
       },
     );
   }
 
-  Widget _crearBoton(){
+  Widget _crearBoton() {
     return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0)
-      ),
-      primary: Colors.brown,
-      textStyle: TextStyle(
-        color: Colors.white,
-      ),
-      ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
-      onPressed:_guardando ? null : _sumbit,
+      onPressed: _guardando ? null : _sumbit,
     );
   }
 
-  void _sumbit() async{
-    if(!formKey.currentState.validate()){
+  void _sumbit() async {
+    if (!formKey.currentState.validate()) {
       //cuando los formularios no son validos
       return;
     }
     //disparo todos los saves del formulario
     formKey.currentState.save();
     setState(() {
-      _guardando=true;
+      _guardando = true;
     });
 
-    cliente.id= prefs.idCliente;
+    cliente.id = prefs.idCliente;
     print(cliente.apellido);
     print(cliente.nombre);
-    final ClienteProvider provider= new ClienteProvider();
+    final ClienteProvider provider = new ClienteProvider();
     await provider.actualizarCliente(cliente);
     // artesanoBloc.changeStreamArtesano(null);
     // await clienteBloc.editarCliente(cliente);
@@ -228,19 +214,18 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
       //_guardando=false;
       mostrarSnackbar('Información guardada');
       Future.delayed(const Duration(milliseconds: 2000), () {
-      Navigator.pop(context);
-    });
+        Navigator.pop(context);
+      });
     });
   }
 
-  void mostrarSnackbar(String mensaje){
+  void mostrarSnackbar(String mensaje) {
     final snackbar = new SnackBar(
       content: Text(mensaje),
-      duration: Duration( milliseconds: 1500 ),
+      duration: Duration(milliseconds: 1500),
       action: SnackBarAction(
-        label: 'VOLVER',
-        onPressed: () => Navigator.pop(context, 'ClienteCuenta')
-      ),
+          label: 'VOLVER',
+          onPressed: () => Navigator.pop(context, 'ClienteCuenta')),
     );
     scaffoldKey.currentState.showSnackBar(snackbar);
   }

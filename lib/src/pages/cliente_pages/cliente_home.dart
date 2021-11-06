@@ -44,9 +44,7 @@ class ClienteHome extends StatelessWidget {
           FondoCliente(),
           Scaffold(
             drawer: DrawerCliente(),
-            backgroundColor: Colors.transparent,
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
               title: Text(
                 'Inicio',
                 style: TextStyle(

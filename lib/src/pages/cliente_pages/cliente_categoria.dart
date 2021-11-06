@@ -20,7 +20,6 @@ class ClienteCategorias extends StatelessWidget {
         children: <Widget>[
           FondoCliente(),
           Scaffold(
-            backgroundColor: Colors.transparent,
             body:  Stack(
               children: <Widget>[
                 listado(context,productosBloc),
@@ -396,8 +395,8 @@ class _HeaderPage extends StatelessWidget {
     return IconHeader(
       icon: Icons.local_mall,
       titulo: 'Categorías',
-      color1: Colors.orange,
-      color2: Color.fromRGBO(232, 217, 56, 1),
+      color1: Colors.purple[700],
+      color2: Colors.purple,
     );
   }
 }

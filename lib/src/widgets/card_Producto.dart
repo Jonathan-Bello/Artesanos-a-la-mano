@@ -206,118 +206,150 @@ class CardProductoShow extends StatelessWidget {
     final ProductosProvider productosProvider = new ProductosProvider();
     //productosProvider.getLikesdeProducto(int.parse(producto.idProducto));
     return Container(
-        child: Card(
-      child: Column(
-        children: <Widget>[
-          ListTile(
-              contentPadding: EdgeInsets.all(10),
-              title: Container(
-                  child: Row(
-                children: <Widget>[
-                  Hero(
-                    tag: producto.idProducto,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: (producto.foto == "null")
-                          ? Image(
-                              image: AssetImage('assets/img/imagenNull.png'),
-                              height: 300.0,
-                              width: 200.0,
-                              fit: BoxFit.cover,
-                            )
-                          : FadeInImage(
-                              image: NetworkImage(producto.foto),
-                              placeholder: AssetImage('assets/img/loading.gif'),
-                              height: 300.0,
-                              width: _screenSize.width * .5,
-                              fit: BoxFit.cover,
-                            ),
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      width: _screenSize.width * .4,
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            "Nombre: " + producto.producto,
-                            overflow: TextOverflow.clip,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text('Disponibilidad'),
-                          (producto.disponibilidad == 1)
-                              ? Icon(
-                                  Icons.check_circle,
-                                  color: Colors.green,
-                                  size: 40,
-                                )
-                              : Icon(
-                                  Icons.cancel,
-                                  color: Colors.red,
-                                  size: 40,
-                                ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "   Categoría: " + producto.categoria,
-                            overflow: TextOverflow.clip,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "   Precio: \u0024${producto.precio}",
-                            overflow: TextOverflow.clip,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text('Favorito'),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          (producto.tieneLike == 1)
-                              ? Icon(
-                                  Icons.favorite,
-                                  color: Colors.purple,
-                                  size: 40,
-                                )
-                              : Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.purple,
-                                  size: 40,
-                                ),
-                          SizedBox(
-                            height: 0,
-                          ),
-                          FutureBuilder(
-                            future: productosProvider.getLikesdeProducto(
-                                int.parse(producto.idProducto)),
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.hasData) {
-                                return Text(
-                                  '${snapshot.data.toString()}',
-                                  overflow: TextOverflow.clip,
-                                );
-                              } else {
-                                return CircularProgressIndicator();
-                              }
-                            },
-                          ),
-                        ],
-                      )),
-                ],
-              )),
-              subtitle: Text("Descripción: " + producto.descripcion),
-              dense: true,
-              onTap: () =>
-                  Navigator.pushNamed(context, '$ruta', arguments: producto)),
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 3.0,
+            offset: Offset(0.0, 0.5),
+            spreadRadius: 3.0,
+          ),
         ],
       ),
-    ));
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              contentPadding: EdgeInsets.all(10),
+              title: Container(
+                child: Row(
+                  children: <Widget>[
+                    Hero(
+                      tag: producto.idProducto,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: (producto.foto == "null")
+                            ? Image(
+                                image: AssetImage('assets/img/imagenNull.png'),
+                                height: 300.0,
+                                width: 200.0,
+                                fit: BoxFit.cover,
+                              )
+                            : FadeInImage(
+                                image: NetworkImage(producto.foto),
+                                placeholder:
+                                    AssetImage('assets/img/loading.gif'),
+                                height: 300.0,
+                                width: _screenSize.width * .5,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: _screenSize.width * .4,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              producto.producto,
+                              overflow: TextOverflow.clip,
+                              style: Theme.of(context).textTheme.subtitle1,
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text('Disponibilidad'),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            (producto.disponibilidad == 1)
+                                ? Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green,
+                                    size: 40,
+                                  )
+                                : Icon(
+                                    Icons.cancel,
+                                    color: Colors.red,
+                                    size: 40,
+                                  ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Categoría: " + producto.categoria,
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                decorationThickness: 2,
+                                decorationColor: Colors.purple,
+                                decoration: TextDecoration.underline,
+                                decorationStyle: TextDecorationStyle.wavy,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Precio: \u0024${producto.precio}",
+                              overflow: TextOverflow.clip,
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            (producto.tieneLike == 1)
+                                ? Icon(
+                                    Icons.favorite,
+                                    color: Colors.purple,
+                                    size: 40,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.purple,
+                                    size: 40,
+                                  ),
+                            SizedBox(
+                              height: 0,
+                            ),
+                            FutureBuilder(
+                              future: productosProvider.getLikesdeProducto(
+                                  int.parse(producto.idProducto)),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  return Text(
+                                    '${snapshot.data.toString()}',
+                                    overflow: TextOverflow.clip,
+                                  );
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 8.0, left: 4.0),
+                child: Text(
+                  producto.descripcion,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
+              dense: true,
+              onTap: () =>
+                  Navigator.pushNamed(context, '$ruta', arguments: producto),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

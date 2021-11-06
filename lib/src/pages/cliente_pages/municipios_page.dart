@@ -4,6 +4,7 @@ import 'package:artesanos_a_la_mano/src/pages/cliente_pages/municipios_tienda.da
 import 'package:artesanos_a_la_mano/src/share_prefs/preferencias_usuario.dart';
 import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
 import 'package:flutter/material.dart';
+
 class ListadoMunicipiosPage extends StatefulWidget {
   //const ListadoMunicipiosPage({Key key}) : super(key: key);
   @override
@@ -13,39 +14,44 @@ class ListadoMunicipiosPage extends StatefulWidget {
 class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
   final prefs = new PreferenciasUsuario();
 
-  int opcion=0;
-
+  int opcion = 0;
 
   @override
   Widget build(BuildContext context) {
-    final int region= ModalRoute.of(context).settings.arguments;
-    final municipioBloc= Provider.ofMunicipios(context);
+    final int region = ModalRoute.of(context).settings.arguments;
+    final municipioBloc = Provider.ofMunicipios(context);
 
     // municipioBloc.cargarProductosCategoria(categoria);
-    Future<bool>_vaciarStream() async {
+    Future<bool> _vaciarStream() async {
       municipioBloc.changeStreamMuncipiosRegion(null);
       return true;
     }
 
-    String reg='';
-    switch(region){
-      case 1: reg='Huauchinango';
-      break;
-      case 2: reg='Teziutlán';
-      break;
-      case 3: reg='Ciudad Serdán';
-      break;
-      case 4: reg='San Pedro Cholula';
-      break;
-      case 5: reg='Puebla';
-      break;
-      case 6: reg='Izúcar De Matamoros';
-      break;
-      case 7: reg='Tehuacán Y Sierra Negra';
-      break;
+    String reg = '';
+    switch (region) {
+      case 1:
+        reg = 'Huauchinango';
+        break;
+      case 2:
+        reg = 'Teziutlán';
+        break;
+      case 3:
+        reg = 'Ciudad Serdán';
+        break;
+      case 4:
+        reg = 'San Pedro Cholula';
+        break;
+      case 5:
+        reg = 'Puebla';
+        break;
+      case 6:
+        reg = 'Izúcar De Matamoros';
+        break;
+      case 7:
+        reg = 'Tehuacán Y Sierra Negra';
+        break;
     }
     // final _screenSize= MediaQuery.of(context).size;
-    
 
     return WillPopScope(
       onWillPop: _vaciarStream,
@@ -57,11 +63,13 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
             appBar: AppBar(
               flexibleSpace: FondoClienteBar(),
               centerTitle: true,
-              title: Text(''+reg,
+              title: Text(
+                '' + reg,
                 style: TextStyle(
-                color: Colors.brown, 
-                fontStyle: FontStyle.italic, 
-                wordSpacing: 5.0, fontSize: 25.0, 
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                  wordSpacing: 5.0,
+                  fontSize: 25.0,
                 ),
               ),
             ),
@@ -97,7 +105,7 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
   //       return ListView.builder(
   //         itemCount: muncipios.length,
   //         itemBuilder: (BuildContext context, int index) {
-  //         return 
+  //         return
   //         //FadeIn(
   //           //duration: Duration(milliseconds: 100*index),
   //           /* child:*/ _crearItem(context,muncipios[index]);
@@ -144,41 +152,47 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
   //   );
   // }
 
-  Widget _navegacion(){
+  Widget _navegacion() {
     return BottomNavigationBar(
-      currentIndex: opcion,
-      backgroundColor: Color.fromRGBO(232, 217, 56, 1),
-      iconSize: 30,
-      selectedItemColor: Colors.purple,
-      onTap: (i){
-        setState(() {
-          opcion=i;
-          p.animateToPage(i, duration: Duration(milliseconds: 500), curve: Curves.bounceOut);
-        });
-      },
-      type: BottomNavigationBarType.fixed,
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.store_mall_directory,),label: 'Tiendas'),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_basket, ),label: 'Productos')
-      ]
-    );
+        currentIndex: opcion,
+        backgroundColor: Color.fromRGBO(232, 217, 56, 1),
+        iconSize: 30,
+        selectedItemColor: Colors.purple,
+        onTap: (i) {
+          setState(() {
+            opcion = i;
+            p.animateToPage(i,
+                duration: Duration(milliseconds: 500), curve: Curves.bounceOut);
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.store_mall_directory,
+              ),
+              label: 'Tiendas'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.shopping_basket,
+              ),
+              label: 'Productos')
+        ]);
   }
 
-  Widget paginas(){
+  Widget paginas() {
     return PageView(
       physics: NeverScrollableScrollPhysics(),
       controller: p,
       children: <Widget>[
-         MunicipiosTienda(),
+        MunicipiosTienda(),
         MunicipiosProductos(),
         // MunicipiosProductos(),
       ],
     );
   }
 
-  PageController p= new PageController(
+  PageController p = new PageController(
     initialPage: 0,
   );
-
 }
-

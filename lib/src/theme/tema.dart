@@ -33,7 +33,7 @@ final miTemaA = ThemeData(
     //size: 30.0
   ),
   appBarTheme: AppBarTheme(
-    color: Colors.transparent,
+    color: Colors.purple,
     iconTheme: IconThemeData(color: Colors.white),
   ),
   backgroundColor: Colors.white,

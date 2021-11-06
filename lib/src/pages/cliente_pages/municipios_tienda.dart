@@ -26,10 +26,10 @@ class MunicipiosTienda extends StatelessWidget {
             appBar: AppBar(
               leading: Container(),
               flexibleSpace: Container(
-                color: Colors.white60,
+                color: Colors.white,
               ),
               centerTitle: true,
-              title: Text('Tiendas'),
+              title: Text('Tiendas',style: Theme.of(context).textTheme.headline5,),
             ),
             backgroundColor: Colors.transparent,
             body: _crearListadoStream(municipioBloc),
@@ -74,7 +74,7 @@ class MunicipiosTienda extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          color: Colors.white60,
+          color: Colors.grey[300],
         ),
       ),
 

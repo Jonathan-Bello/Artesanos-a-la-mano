@@ -66,7 +66,7 @@ class HeaderDiagonalRect extends StatelessWidget {
           width: double.infinity,
           alignment: AlignmentDirectional.topCenter,
           child: Image(
-            height: height *.4,
+            height: height * .4,
             image: AssetImage('assets/img/propio/fondoU.jpg'),
             fit: BoxFit.cover,
           ),
@@ -138,6 +138,7 @@ class HeaderDiagonal extends StatelessWidget {
     final colorNegro = Colors.black.withOpacity(0.70);
     return Stack(
       children: <Widget>[
+
         Container(
           height: double.infinity,
           width: double.infinity,
@@ -492,20 +493,22 @@ class IconHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorNegro = Colors.black.withOpacity(0.70);
+    // final colorNegro = Colors.black.withOpacity(0.70);
     return Stack(
       children: <Widget>[
         _IconHeaderBackground(
           color1: this.color1,
           color2: this.color2,
         ),
+        // FondoClienteBar(),
+        // HeaderDiagonalRect(),
         Positioned(
           top: -20,
           left: -50,
           child: Icon(
             this.icon,
             size: 250,
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withOpacity(0.0),
           ),
         ),
         Column(
@@ -518,7 +521,7 @@ class IconHeader extends StatelessWidget {
               this.titulo,
               style: TextStyle(
                 fontSize: 40,
-                color: colorNegro,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.none,
               ),
@@ -529,7 +532,7 @@ class IconHeader extends StatelessWidget {
             Icon(
               this.icon,
               size: 100,
-              color: colorNegro,
+              color: Colors.white,
             ),
           ],
         )
@@ -551,28 +554,31 @@ class _IconHeaderBackground extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 300,
+      // child: FondoClienteBar(),
       decoration: BoxDecoration(
-          //color:Color.fromRGBO(232, 217, 56, 1),
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
-          // image: DecorationImage(
-          //   image: AssetImage('assets/img/propio/barraU.jpg'),
-          //   fit: BoxFit.cover,
-          // ),
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                color1,
-                color2,
-                color2,
-                color2,
-                color1
-                // Colors.orange,
-                // Color.fromRGBO(232, 217, 56, 1),
-                // Color.fromRGBO(232, 217, 56, 1),
-                // Color.fromRGBO(232, 217, 56, 1),
-                // Colors.orange
-              ])),
+        //color:Color.fromRGBO(232, 217, 56, 1),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(80)),
+        image: DecorationImage(
+          image: AssetImage('assets/img/propio/fondoU.jpg'),
+          fit: BoxFit.cover,
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            color1,
+            color2,
+            color2,
+            color2,
+            color1
+            // Colors.orange,
+            // Color.fromRGBO(232, 217, 56, 1),
+            // Color.fromRGBO(232, 217, 56, 1),
+            // Color.fromRGBO(232, 217, 56, 1),
+            // Colors.orange
+          ],
+        ),
+      ),
     );
   }
 }

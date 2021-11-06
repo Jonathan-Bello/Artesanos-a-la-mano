@@ -1,6 +1,7 @@
 import 'package:artesanos_a_la_mano/src/bloc/cliente_blocs/login_cliente_bloc.dart';
 import 'package:artesanos_a_la_mano/src/bloc/provider_bloc.dart';
 import 'package:artesanos_a_la_mano/src/providers/cliente_provider.dart';
+import 'package:artesanos_a_la_mano/src/utils/utils.dart';
 import 'package:artesanos_a_la_mano/src/widgets/headers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -174,16 +175,20 @@ class _LoginClienteState extends State<LoginCliente> {
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return ElevatedButton(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 20.0),
-              child: Text('Ingresar'),
-            ),
-            style: ElevatedButton.styleFrom(
-              textStyle: TextStyle(color: Colors.white, fontSize: 18.0),
-            ),
-            onPressed: snapshot.hasData && _cargando == false
-                ? () => _login(bloc, context)
-                : null);
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 20.0),
+            child: Text('Ingresar'),
+          ),
+          style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(color: Colors.white, fontSize: 18.0),
+          ),
+          onPressed: snapshot.hasData && _cargando == false
+              ? () async {
+                  mostrarCarga(context);
+                  _login(bloc, context);
+                }
+              : null,
+        );
       },
     );
   }

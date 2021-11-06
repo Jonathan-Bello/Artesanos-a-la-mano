@@ -32,7 +32,7 @@ class ListadoTiendasMunicipio extends StatelessWidget {
               centerTitle: true,
               title: Text(''+idMunicipio.toString(),
                 style: TextStyle(
-                color: Colors.brown, 
+                color: Colors.white, 
                 fontStyle: FontStyle.italic, 
                 wordSpacing: 5.0, fontSize: 25.0, 
                 ),

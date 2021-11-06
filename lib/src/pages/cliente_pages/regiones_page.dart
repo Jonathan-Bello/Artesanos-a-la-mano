@@ -19,7 +19,7 @@ class ListadoRegiones extends StatelessWidget {
             title: Text(
               'Regiones',
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontStyle: FontStyle.italic,
                 wordSpacing: 5.0,
                 fontSize: 25.0,
