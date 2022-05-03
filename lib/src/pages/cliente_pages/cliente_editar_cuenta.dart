@@ -20,7 +20,7 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
 
   final formKey = GlobalKey<FormState>();
 
-  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final prefs = new PreferenciasUsuario();
 
@@ -148,7 +148,7 @@ class _EditarCuentaPageState extends State<EditarCuentaPage> {
           return 'Debe ingresar un numero telefonico valido';
         }
       },
-      onSaved: (value) => cliente.celular = int.parse(value),
+      onSaved: (value) => cliente.celular = value,
     );
   }
 

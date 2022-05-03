@@ -265,7 +265,7 @@ class ClienteHome extends StatelessWidget {
               ),
               style: btnStyle,
               onPressed: () {
-                bloc.cargarProductosCategoria('Varios', prefs.idCliente);
+                bloc.cargarProductosCategoria(9, prefs.idCliente);
                 Navigator.pushNamed(context, 'ListadoCategoria',
                     arguments: 'Varios');
               }),
@@ -291,7 +291,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Cerámica', prefs.idCliente);
+                  bloc.cargarProductosCategoria(1, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Cerámica');
                 }),
@@ -307,7 +307,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Madera', prefs.idCliente);
+                  bloc.cargarProductosCategoria(3, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Madera');
                 }),
@@ -324,7 +324,7 @@ class ClienteHome extends StatelessWidget {
                 style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria(
-                      'Mármol, Piedra y Vidrio', prefs.idCliente);
+                      5, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Mármol, Piedra y Vidrio');
                 }),
@@ -340,7 +340,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Metal', prefs.idCliente);
+                  bloc.cargarProductosCategoria(7, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Metal');
                 }),
@@ -363,7 +363,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Barro', prefs.idCliente);
+                  bloc.cargarProductosCategoria(2, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Barro');
                 }),
@@ -380,7 +380,7 @@ class ClienteHome extends StatelessWidget {
                 style: btnStyle,
                 onPressed: () {
                   bloc.cargarProductosCategoria(
-                      'Piel y Cuero', prefs.idCliente);
+                      4, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Piel y Cuero');
                 }),
@@ -396,7 +396,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Textil', prefs.idCliente);
+                  bloc.cargarProductosCategoria(6, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Textil');
                 }),
@@ -412,7 +412,7 @@ class ClienteHome extends StatelessWidget {
                 ),
                 style: btnStyle,
                 onPressed: () {
-                  bloc.cargarProductosCategoria('Joyería', prefs.idCliente);
+                  bloc.cargarProductosCategoria(8, prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',
                       arguments: 'Joyería');
                 }),

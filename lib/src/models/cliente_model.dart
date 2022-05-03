@@ -20,18 +20,18 @@ class ClienteModel {
     String nombre;
     String apellido;
     String correo;
-    int celular;
+    String celular;
     String usuario;
     String contrasea;
 
     factory ClienteModel.fromJson(Map<String, dynamic> json) => ClienteModel(
-        id         :  json["Id"],
-        nombre     :  json["Nombre"].toString(),
-        apellido   :  json["Apellidos"].toString(),
-        correo     :  json["Correo"].toString(),
-        celular    :  json["Celular"],
-        usuario    :  json["Usuario"],
-        contrasea  :  json["Password"],
+        id         :  json["id"],
+        nombre     :  json["nombre"].toString(),
+        apellido   :  json["apellidos"].toString(),
+        correo     :  json["correo"].toString(),
+        celular    :  json["celular"].toString(),
+        usuario    :  json["usuario"],
+        contrasea  :  json["password"],
     );
 
     Map<String, dynamic> toJson() => {

@@ -87,14 +87,14 @@ class ProductoModel {
     int tieneLike;
 
     factory ProductoModel.fromJson(Map<String, dynamic> json) => ProductoModel(
-        idProducto: json["Id"].toString(),
-        producto: json["Producto"].toString(),
-        descripcion: json["Descripcion"].toString(),
-        precio: json["Precio"].toDouble(),
-        categoria: json["Categoria"],
-        disponibilidad: json["Disponibilidad"],
-        foto: json["Foto"],
-        idArtesano: json["IdArtesano"],
+        idProducto: json["id"].toString(),
+        producto: json["producto"].toString(),
+        descripcion: json["descripcion"].toString(),
+        precio: json["precio"].toDouble(),
+        categoria: json["categoria"],
+        disponibilidad: json["disponibilidad"],
+        foto: json["foto"],
+        idArtesano: json["idArtesano"],
         tieneLike: json["tieneLike"]
     );
 

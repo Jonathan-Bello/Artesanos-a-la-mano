@@ -34,7 +34,7 @@ class PreferenciasUsuario {
     _prefs.setInt('UsuarioId', value);
   }
   //------
-  get idCliente{
+  int get idCliente{
     return _prefs.getInt('ClienteId') ?? 1;
   }
 

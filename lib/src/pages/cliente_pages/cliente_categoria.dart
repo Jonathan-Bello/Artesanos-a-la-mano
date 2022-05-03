@@ -64,7 +64,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xff6989F5),
             color2: Color(0xff906EF5),
             onPress: (){
-              bloc.cargarProductosCategoria('Cerámica',prefs.idCliente);
+              bloc.cargarProductosCategoria(1,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Cerámica');
             },
             ),
@@ -74,7 +74,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xff66A9F2),
             color2: Color(0xff536CF6),
             onPress: (){
-              bloc.cargarProductosCategoria('Barro',prefs.idCliente);
+              bloc.cargarProductosCategoria(2,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Barro');
             },
             ),
@@ -85,7 +85,7 @@ class ClienteCategorias extends StatelessWidget {
             color1:  Color(0xffF2D572),
             color2: Color(0xffE06AA3),
             onPress: (){
-              bloc.cargarProductosCategoria('Madera',prefs.idCliente);
+              bloc.cargarProductosCategoria(3,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Madera');
             },
             ),
@@ -97,7 +97,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xff317183),
             color2: Color(0xff46997D),
             onPress: (){
-              bloc.cargarProductosCategoria('Piel y Cuero',prefs.idCliente);
+              bloc.cargarProductosCategoria(4,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Piel y Cuero');
             },
             ),
@@ -108,7 +108,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xff0EC654),
             color2: Color(0xff53A271),
             onPress: (){
-              bloc.cargarProductosCategoria('Mármol, Piedra y Vidrio',prefs.idCliente);
+              bloc.cargarProductosCategoria(5,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Mármol, Piedra y Vidrio');
             },
             ),
@@ -119,7 +119,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xffF58C72),
             color2: Color(0xffF3471D),
             onPress: (){
-              bloc.cargarProductosCategoria('Textil',prefs.idCliente);
+              bloc.cargarProductosCategoria(6,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Textil');
             },
             ),
@@ -130,7 +130,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xffB6C7BD),
             color2: Color(0xff7C8981),
             onPress: (){
-              bloc.cargarProductosCategoria('Metal',prefs.idCliente);
+              bloc.cargarProductosCategoria(7,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Metal');
             },
             ),
@@ -141,7 +141,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Color(0xffF09BEA),
             color2: Color(0xffF144E6),
             onPress: (){
-              bloc.cargarProductosCategoria('Joyería',prefs.idCliente);
+              bloc.cargarProductosCategoria(8,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Joyería');
             },
             ),
@@ -152,7 +152,7 @@ class ClienteCategorias extends StatelessWidget {
             color1: Colors.amber,
             color2: Colors.orange,
             onPress: (){
-              bloc.cargarProductosCategoria('Varios',prefs.idCliente);
+              bloc.cargarProductosCategoria(9,prefs.idCliente);
               Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Varios');
             },
             ),
@@ -202,7 +202,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Ladrillero, Ceramista, Esmaltador, Alfareroinfosegovia.com Todos los derechos reservados.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Cerámica',prefs.idCliente);
+                  bloc.cargarProductosCategoria(1,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Cerámica');
                 },
               ),
@@ -224,7 +224,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('----Dudas-----'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Barro',prefs.idCliente);
+                  bloc.cargarProductosCategoria(2,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Barro');
                 },
               ),
@@ -246,7 +246,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Dorador, Tallista, Tornero.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Madera',prefs.idCliente);
+                  bloc.cargarProductosCategoria(3,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Madera');
                 },
               ),
@@ -267,7 +267,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('----------------'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Piel y Cuero',prefs.idCliente);
+                  bloc.cargarProductosCategoria(4,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Piel y Cuero');
                 },
               ),
@@ -288,7 +288,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Cantero, Vidrio emplomado, Tallista de Cristal.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Mármol, Piedra y Vidrio',prefs.idCliente);
+                  bloc.cargarProductosCategoria(5,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Mármol, Piedra y Vidrio');
                 },
               ),
@@ -309,7 +309,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Telar, Telas pintadas, Bordado.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Textil',prefs.idCliente);
+                  bloc.cargarProductosCategoria(6,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Textil');
                 },
               ),
@@ -330,7 +330,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Cobre, Hierro, Estaño.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Metal',prefs.idCliente);
+                  bloc.cargarProductosCategoria(7,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Metal');
                 },
               ),
@@ -351,7 +351,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Orfebrería.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Joyería',prefs.idCliente);
+                  bloc.cargarProductosCategoria(8,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Joyería');
                 },
               ),
@@ -372,7 +372,7 @@ class ClienteCategorias extends StatelessWidget {
                 subtitle: Text('Cerería, Flores secas, Perfumista, Relojero, Tapicero, Fundidor, Restauración, Grabador.'),
                 trailing: Icon(Icons.category),
                 onTap: (){
-                  bloc.cargarProductosCategoria('Varios',prefs.idCliente);
+                  bloc.cargarProductosCategoria(9,prefs.idCliente);
                   Navigator.pushNamed(context, 'ListadoCategoria',arguments: 'Varios');
                 },
               ),

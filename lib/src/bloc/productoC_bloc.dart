@@ -51,7 +51,7 @@ class ProductosClienteBloc{
     return true;
   }
 
-  void cargarProductosCategoria(String categoria,int idCliente) async {
+  void cargarProductosCategoria(int  categoria,int idCliente) async {
     final productos = await _productosProvider.getProductosCategoria(categoria,idCliente);
     _productosCategoriaController.sink.add( productos );
   }

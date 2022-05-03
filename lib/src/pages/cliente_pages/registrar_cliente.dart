@@ -223,7 +223,7 @@ class _RegistrarClienteState extends State<RegistrarCliente> {
           else
             return 'Sólo números con 10 digitos';
         },
-        onSaved: (value) => cliente.celular = int.parse(value),
+        onSaved: (value) => cliente.celular = value,
       ),
     );
   }
