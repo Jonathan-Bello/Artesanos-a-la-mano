@@ -6,7 +6,6 @@ import 'package:artesanos_a_la_mano/src/models/artesano_model.dart';
 class ArtesanoProvider {
 
   String _url = "valorarte.000webhostapp.com";
-  
   //Obtener Artesano
   Future<ArtesanosModel> obtenerArtesano (int idArtesano)async{
     final url = Uri.https(_url, 'Artesanos/GetArtesano.php', {
@@ -98,11 +97,11 @@ class ArtesanoProvider {
     decodedData.forEach( (item){
       final prodTemp = MunicipioModel.fromJson(item);
       municipios.add(prodTemp);
-      
     });
     print(municipios[0].nombre);
     return municipios[0];
   }
+
   //Obtener municipios
   Future<List<MunicipioModel>> todosLosMunicipios() async{
     final url = Uri.https(_url, 'Municipios/GetMunicipios.php', {});

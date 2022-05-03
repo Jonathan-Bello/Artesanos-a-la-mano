@@ -8,11 +8,10 @@ class MunicipiosTienda extends StatelessWidget {
   //const MunicipiosTienda({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    final municipioBloc= Provider.ofMunicipios(context);
+    final municipioBloc = Provider.ofMunicipios(context);
 
     // productosBloc.cargarProductosCategoria(categoria);
-    Future<bool>_vaciarStream() async {
+    Future<bool> _vaciarStream() async {
       //municipioBloc.changeStreamMuncipiosRegion(null);
       return true;
     }
@@ -29,7 +28,10 @@ class MunicipiosTienda extends StatelessWidget {
                 color: Colors.white,
               ),
               centerTitle: true,
-              title: Text('Tiendas',style: Theme.of(context).textTheme.headline5,),
+              title: Text(
+                'Tiendas',
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
             backgroundColor: Colors.transparent,
             body: _crearListadoStream(municipioBloc),
@@ -38,57 +40,59 @@ class MunicipiosTienda extends StatelessWidget {
       ),
     );
   }
-  }
+}
 
-  Widget _crearListadoStream(MunicipiosBloc bloc){
-    return StreamBuilder(
-      stream: bloc.municipiosRegion,
-      builder: (BuildContext context, AsyncSnapshot<List<MunicipioModel>> snapshot){
-        if(snapshot.hasData){
+Widget _crearListadoStream(MunicipiosBloc bloc) {
+  return StreamBuilder(
+    stream: bloc.municipiosRegion,
+    builder:
+        (BuildContext context, AsyncSnapshot<List<MunicipioModel>> snapshot) {
+      if (snapshot.hasData) {
         final muncipios = snapshot.data;
         return ListView.builder(
           itemCount: muncipios.length,
           itemBuilder: (BuildContext context, int index) {
-          return  _crearItem(context,muncipios[index]);
+            return _crearItem(context, muncipios[index]);
           },
         );
-        }else{
-          return Center(
-            child: CircularProgressIndicator(backgroundColor: Colors.amber,),
-          );
-        }
-      },
-    );
-  }
-
-  Widget _crearItem(BuildContext context, MunicipioModel municipio){
-    final _screenSize= MediaQuery.of(context).size;
-    return ListTile(
-      title: Container(
-        height: _screenSize.height*.08,
-        // width: _screenSize.width*.5,
-        child: Card(
-          child:Center(
-            child: Text(
-              municipio.nombre,
-              style: TextStyle(fontSize: 20),
-            ),
+      } else {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.amber,
           ),
-          color: Colors.grey[300],
-        ),
-      ),
-
-      onTap: (){
-        // if(opcion==0){
-          final artesanoBloc= Provider.ofArtesano(context);
-          artesanoBloc.cargarArtesanoMunicipio(municipio.idMunicipio);
-          Navigator.pushNamed(context, 'ListadoTiendasMunicipio',arguments: 'Tiendas');
-        // }else{
-        //   final productosBloc= Provider.ofClienteProductos(context);
-        //   productosBloc.cargarProductosMunicipio(municipio.idMunicipio, prefs.idCliente);
-        //   Navigator.pushNamed(context, 'ListadoProductosMunicipios',arguments: municipio.nombre);
-        // }
-      },
-    );
+        );
+      }
+    },
+  );
 }
 
+Widget _crearItem(BuildContext context, MunicipioModel municipio) {
+  final _screenSize = MediaQuery.of(context).size;
+  return ListTile(
+    title: Container(
+      height: _screenSize.height * .08,
+      // width: _screenSize.width*.5,
+      child: Card(
+        child: Center(
+          child: Text(
+            municipio.nombre,
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+        color: Colors.grey[300],
+      ),
+    ),
+    onTap: () {
+      // if(opcion==0){
+      final artesanoBloc = Provider.ofArtesano(context);
+      artesanoBloc.cargarArtesanoMunicipio(municipio.idMunicipio);
+      Navigator.pushNamed(context, 'ListadoTiendasMunicipio',
+          arguments: 'Tiendas');
+      // }else{
+      //   final productosBloc= Provider.ofClienteProductos(context);
+      //   productosBloc.cargarProductosMunicipio(municipio.idMunicipio, prefs.idCliente);
+      //   Navigator.pushNamed(context, 'ListadoProductosMunicipios',arguments: municipio.nombre);
+      // }
+    },
+  );
+}

@@ -185,7 +185,7 @@ class _LoginClienteState extends State<LoginCliente> {
           onPressed: snapshot.hasData && _cargando == false
               ? () async {
                   mostrarCarga(context);
-                  _login(bloc, context);
+                  await _login(bloc, context);
                 }
               : null,
         );

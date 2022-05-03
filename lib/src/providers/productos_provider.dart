@@ -26,6 +26,7 @@ class ProductosProvider {
     print (decodedData);
     return true;
   }
+
   //subo el prodcuto. Sin bloc
   Future crearProduct(String nombre, String descripcion,double precio, String categoria, int disponible, String urlImage, int idTienda ) async{
     final url = Uri.https( _url, '/Productos/InsertarProducto.php', {
@@ -64,6 +65,7 @@ class ProductosProvider {
     //print(productos);
     return productos;
   }
+
   //Actualizar producto
   Future<bool> editarProducto(ProductoModel producto) async{
     final url = Uri.https( _url, '/Productos/ActualizarProducto.php', {

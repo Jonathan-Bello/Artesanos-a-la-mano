@@ -40,7 +40,6 @@ class MunicipiosProvider {
     decodedData.forEach( (item){
       final prodTemp = MunicipioModel.fromJson(item);
       municipios.add(prodTemp);
-      
     });
     print(municipios[0].nombre);
     return municipios[0];
@@ -63,6 +62,4 @@ class MunicipiosProvider {
     //print(municipios);
     return municipios;
   }
-
-
 }

@@ -153,9 +153,19 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
   // }
 
   Widget _navegacion() {
-    return BottomNavigationBar(
+    return Container(
+      decoration: BoxDecoration(
+        // borderRadius: BorderRadius.circular(5),
+        color: Colors.transparent,
+        image: DecorationImage(
+          image: AssetImage('assets/img/propio/barraU.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: BottomNavigationBar(
         currentIndex: opcion,
-        backgroundColor: Color.fromRGBO(232, 217, 56, 1),
+        backgroundColor: Colors.transparent,
+        // backgroundColor: Color.fromRGBO(232, 217, 56, 1),
         iconSize: 30,
         selectedItemColor: Colors.purple,
         onTap: (i) {
@@ -168,16 +178,20 @@ class _ListadoMunicipiosPageState extends State<ListadoMunicipiosPage> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.store_mall_directory,
-              ),
-              label: 'Tiendas'),
+            icon: Icon(
+              Icons.store_mall_directory,
+            ),
+            label: 'Tiendas',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shopping_basket,
-              ),
-              label: 'Productos')
-        ]);
+            icon: Icon(
+              Icons.shopping_basket,
+            ),
+            label: 'Productos',
+          )
+        ],
+      ),
+    );
   }
 
   Widget paginas() {
