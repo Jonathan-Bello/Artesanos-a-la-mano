@@ -113,7 +113,7 @@ class _ProductoPageState extends State<ProductoPage> {
                       ),
                       _crearPrecio(),
                       _crearDisponible(),
-                      _crearCategorias(),
+                      // _crearCategorias(),
                       _crearDecripcion(),
                       _crearBoton(),
                     ],

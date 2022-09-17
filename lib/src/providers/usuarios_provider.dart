@@ -4,10 +4,10 @@ import 'dart:convert';
 
 class UsuariosProvider{
   //String _url = "hackatecweb.azurewebsites.net";
-  String _url = "valorarte.000webhostapp.com";
+  String _url = "187.157.132.21:82";
 
   Future loginArtesano(String user, String pass) async{
-    final url = Uri.https(_url, 'Artesanos/Login.php', {
+    final url = Uri.http(_url, 'Proyectos/Artesanos/Login', {
       'usuario'  : user,
       'password'  : pass
     });

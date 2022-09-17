@@ -134,7 +134,7 @@ class _ListaProductosState extends State<ListaProductos> {
       ),
       onDismissed: (direccion){
       //borrar elemento
-        bloc.borrarProducto(int.parse(producto.idProducto));
+        bloc.borrarProducto(producto.idProducto);
         Future.delayed(const Duration(milliseconds: 500), () {
           bloc.cargarProductos(_usuarioId,1);
         });

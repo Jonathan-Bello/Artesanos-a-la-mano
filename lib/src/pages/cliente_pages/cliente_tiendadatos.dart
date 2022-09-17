@@ -32,7 +32,7 @@ class ClienteTiendaPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               SizedBox(height: 10),
-              _artesanoUbicacion(artesano, context, municipios),
+              // _artesanoUbicacion(artesano, context, municipios),
               SizedBox(height: 30),
               _artesanoContacto(artesano, context),
               SizedBox(height: 30),

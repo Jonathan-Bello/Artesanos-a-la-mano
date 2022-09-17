@@ -128,7 +128,7 @@ class ProductosHorizontal extends StatelessWidget {
       child: tarjeta,
       onTap: () {
         final ProductosClienteBloc bloc = new ProductosClienteBloc();
-        bloc.obtenerLike(int.parse(producto.idProducto));
+        bloc.obtenerLike(producto.idProducto);
         timeDilation = 2.0;
         Navigator.pushNamed(
           context,

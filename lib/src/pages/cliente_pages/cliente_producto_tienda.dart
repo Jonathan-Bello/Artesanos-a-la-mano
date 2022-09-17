@@ -29,7 +29,7 @@ class _ProductoDetallesTiendaState extends State<ProductoDetallesTienda> {
 
     final ProductoModel producto = ModalRoute.of(context).settings.arguments;
 
-    productosBlocCliente.obtenerLike(int.parse(producto.idProducto));
+    productosBlocCliente.obtenerLike(producto.idProducto);
 
     return Scaffold(
         body: CustomScrollView(
@@ -139,10 +139,10 @@ class _ProductoDetallesTiendaState extends State<ProductoDetallesTienda> {
                   setState(() {
                     productoModel.tieneLike = 0;
                     bloc.quitarLike(
-                        prefs.idCliente, int.parse(productoModel.idProducto));
-                    // bloc.obtenerLike(int.parse(productoModel.idProducto));
+                        prefs.idCliente, productoModel.idProducto);
+                    // bloc.obtenerLike(productoModel.idProducto);
                     // setState(() {
-                    //  bloc.obtenerLike(int.parse(productoModel.idProducto));
+                    //  bloc.obtenerLike(productoModel.idProducto);
                     // });
                     //numeroLike(productoModel);
                   });
@@ -155,9 +155,9 @@ class _ProductoDetallesTiendaState extends State<ProductoDetallesTienda> {
                   setState(() {
                     productoModel.tieneLike = 1;
                     bloc.darLike(
-                        prefs.idCliente, int.parse(productoModel.idProducto));
+                        prefs.idCliente, productoModel.idProducto);
                     // setState(() {
-                    //bloc.obtenerLike(int.parse(productoModel.idProducto));
+                    //bloc.obtenerLike(productoModel.idProducto);
                     // });
                     //numeroLike(productoModel);
                   });
@@ -169,7 +169,7 @@ class _ProductoDetallesTiendaState extends State<ProductoDetallesTienda> {
 
         FutureBuilder(
           future: productosProvider
-              .getLikesdeProducto(int.parse(productoModel.idProducto)),
+              .getLikesdeProducto(productoModel.idProducto),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return Text(

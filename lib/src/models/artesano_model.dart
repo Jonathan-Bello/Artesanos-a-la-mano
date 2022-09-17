@@ -41,20 +41,20 @@ class ArtesanosModel {
     });
 
     factory ArtesanosModel.fromJson(Map<String, dynamic> json) => ArtesanosModel(
-        id: json["Id"],
-        usuario: json["Usuario"].toString(),
-        pwd: json["Password"].toString(),
-        nombre: json["Nombre"],
-        apellidos: json["Apellidos"],
-        correo: json["Correo"].toString(),
-        celular: json["Celular"].toString(),
-        tienda: json["Tienda"],
-        calle: json["Calle"].toString(),
-        colonia: json["Colonia"].toString(),
-        cP: json["CP"],
-        idMunicipio: json["IdMunicipio"],
-        region: json["Region"],
-        referencias: json["Referencias"].toString(),
+        id: json["id"],
+        usuario: json["usuario"].toString(),
+        pwd: json["password"].toString(),
+        nombre: json["nombre"],
+        apellidos: json["apellidos"],
+        correo: json["correo"].toString(),
+        celular: json["celular"].toString(),
+        tienda: json["tienda"],
+        calle: json["calle"].toString(),
+        colonia: json["colonia"].toString(),
+        cP: json["cp"],
+        idMunicipio: json["idMunicipio"],
+        region: json["region"],
+        referencias: json["referencias"].toString(),
     );
 
     Map<String, dynamic> toJson() => {

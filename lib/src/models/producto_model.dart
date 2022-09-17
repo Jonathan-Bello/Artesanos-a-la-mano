@@ -76,7 +76,7 @@ class ProductoModel {
         this.tieneLike=0,
     });
 
-    String idProducto;
+    int idProducto;
     String producto;
     String descripcion;
     double precio;
@@ -87,7 +87,7 @@ class ProductoModel {
     int tieneLike;
 
     factory ProductoModel.fromJson(Map<String, dynamic> json) => ProductoModel(
-        idProducto: json["id"].toString(),
+        idProducto: json["id"],
         producto: json["producto"].toString(),
         descripcion: json["descripcion"].toString(),
         precio: json["precio"].toDouble(),

@@ -31,7 +31,7 @@ class _ProductoDetallesState extends State<ProductoDetalles> {
 
     final ProductoModel producto = ModalRoute.of(context).settings.arguments;
 
-    productosBlocCliente.obtenerLike(int.parse(producto.idProducto));
+    productosBlocCliente.obtenerLike(producto.idProducto);
 
     return Scaffold(
         body: CustomScrollView(
@@ -39,7 +39,7 @@ class _ProductoDetallesState extends State<ProductoDetalles> {
         CustomSilverAppBar(producto: producto),
         SliverList(
           delegate: SliverChildListDelegate([
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             _imagenProducto(producto, context, artesanoBloc, productosBloc),
             _like(producto, productosBlocCliente),
             _descripcion(producto),
@@ -153,10 +153,10 @@ class _ProductoDetallesState extends State<ProductoDetalles> {
                   setState(() {
                     productoModel.tieneLike = 0;
                     bloc.quitarLike(
-                        prefs.idCliente, int.parse(productoModel.idProducto));
-                    // bloc.obtenerLike(int.parse(productoModel.idProducto));
+                        prefs.idCliente, productoModel.idProducto);
+                    // bloc.obtenerLike(productoModel.idProducto);
                     // setState(() {
-                    //  bloc.obtenerLike(int.parse(productoModel.idProducto));
+                    //  bloc.obtenerLike(productoModel.idProducto);
                     // });
                     //numeroLike(productoModel);
                   });
@@ -169,9 +169,9 @@ class _ProductoDetallesState extends State<ProductoDetalles> {
                   setState(() {
                     productoModel.tieneLike = 1;
                     bloc.darLike(
-                        prefs.idCliente, int.parse(productoModel.idProducto));
+                        prefs.idCliente, productoModel.idProducto);
                     // setState(() {
-                    //bloc.obtenerLike(int.parse(productoModel.idProducto));
+                    //bloc.obtenerLike(productoModel.idProducto);
                     // });
                     //numeroLike(productoModel);
                   });
@@ -183,7 +183,7 @@ class _ProductoDetallesState extends State<ProductoDetalles> {
 
         FutureBuilder(
           future: productosProvider
-              .getLikesdeProducto(int.parse(productoModel.idProducto)),
+              .getLikesdeProducto(productoModel.idProducto),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return Text(

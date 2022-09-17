@@ -16,9 +16,9 @@ class MunicipioModel {
     int region;
 
     factory MunicipioModel.fromJson(Map<String, dynamic> json) => MunicipioModel(
-        idMunicipio: json["Id"],
-        nombre: json["Nombre"],
-        region: json["Region"],
+        idMunicipio: json["id"],
+        nombre: json["nombre"],
+        region: json["region"],
     );
 
     Map<String, dynamic> toJson() => {

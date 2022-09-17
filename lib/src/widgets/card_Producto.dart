@@ -14,7 +14,7 @@ class CardProducto extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     final ProductosProvider productosProvider = new ProductosProvider();
-    //productosProvider.getLikesdeProducto(int.parse(producto.idProducto));
+    //productosProvider.getLikesdeProducto((producto.idProducto));
     return Container(
         child: Card(
       child: Column(
@@ -95,7 +95,7 @@ class CardProducto extends StatelessWidget {
                             ),
                             FutureBuilder(
                               future: productosProvider.getLikesdeProducto(
-                                  int.parse(producto.idProducto)),
+                                  (producto.idProducto)),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.hasData) {
@@ -171,7 +171,7 @@ class CardProducto extends StatelessWidget {
                                 final productosBloc =
                                     Provider.ofProduc(context);
                                 productosBloc.borrarProducto(
-                                    int.parse(producto.idProducto));
+                                    (producto.idProducto));
                                 Future.delayed(
                                     const Duration(milliseconds: 500), () {
                                   productosBloc.cargarProductos(
@@ -204,7 +204,7 @@ class CardProductoShow extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     final ProductosProvider productosProvider = new ProductosProvider();
-    //productosProvider.getLikesdeProducto(int.parse(producto.idProducto));
+    //productosProvider.getLikesdeProducto((producto.idProducto));
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
@@ -318,7 +318,7 @@ class CardProductoShow extends StatelessWidget {
                             ),
                             FutureBuilder(
                               future: productosProvider.getLikesdeProducto(
-                                  int.parse(producto.idProducto)),
+                                  (producto.idProducto)),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.hasData) {

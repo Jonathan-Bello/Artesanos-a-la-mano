@@ -25,7 +25,7 @@ class _PerfilArtesanoPageState extends State<PerfilArtesanoPage> {
   ArtesanoBloc artesanoBloc;
 
   final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Preferencias de Ususario
   final prefs = new PreferenciasUsuario();
@@ -111,25 +111,25 @@ class _PerfilArtesanoPageState extends State<PerfilArtesanoPage> {
               SizedBox(height: 5),
               _txtFormReferencias(),
               SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.black45),
-                ),
-                //color: Colors.black,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        "    Municipio:",
-                        style: TextStyle(fontSize: 13, color: Colors.black45),
-                      ),
-                      width: _screenSize.width * .8,
-                    ),
-                    _crearMunicipios(),
-                  ],
-                ),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(20),
+              //     border: Border.all(color: Colors.black45),
+              //   ),
+              //   //color: Colors.black,
+              //   // child: Column(
+              //   //   children: <Widget>[
+              //   //     Container(
+              //   //       child: Text(
+              //   //         "    Municipio:",
+              //   //         style: TextStyle(fontSize: 13, color: Colors.black45),
+              //   //       ),
+              //   //       width: _screenSize.width * .8,
+              //   //     ),
+              //   //     _crearMunicipios(),
+              //     // ],
+              //   // ),
+              // ),
               SizedBox(height: 20),
               Text("Datos de Personales", style: TextStyle(fontSize: 20)),
               SizedBox(height: 10),
@@ -155,7 +155,7 @@ class _PerfilArtesanoPageState extends State<PerfilArtesanoPage> {
       builder: (BuildContext context, AsyncSnapshot<ArtesanosModel> snapshot) {
         if (snapshot.hasData) {
           artesano = snapshot.data;
-          _opcionSelecionada = (artesano.idMunicipio - 1).toString();
+          _opcionSelecionada = (artesano.idMunicipio).toString();
           final _screenSize = MediaQuery.of(context).size;
           final blocValidation = Provider.ofValitation(context);
           return Container(

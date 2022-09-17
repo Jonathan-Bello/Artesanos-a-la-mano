@@ -4,10 +4,10 @@ import 'package:http/http.dart' as http;
 
 class MunicipiosProvider {
 
-  String _url = "valorarte.000webhostapp.com";
+  String _url = "187.157.132.21:82";
 
   Future<List<MunicipioModel>> getMunicipiosRegion(int region) async{
-    final url = Uri.https(_url, 'Municipios/GetMunicipiosPorRegion.php', {
+    final url = Uri.http(_url, 'Proyectos/Municipios/GetMunicipiosRegion', {
       'region'  : region.toString(),                                                 
     });
     print(url);
@@ -27,7 +27,7 @@ class MunicipiosProvider {
   }
 
   Future<MunicipioModel> consultarMunicipio(int idMunicipio) async {
-    final url = Uri.https( _url, 'Municipios/GetMunicipio.php', {
+    final url = Uri.http( _url, 'Proyectos/Municipios/GetMunicipio', {
       'idmunicipio': idMunicipio.toString(),
     });
     print(url);
@@ -47,7 +47,7 @@ class MunicipiosProvider {
 
   //Obtener municipios
   Future<List<MunicipioModel>> todosLosMunicipios() async{
-    final url = Uri.https(_url, 'Municipios/GetMunicipios.php', {});
+    final url = Uri.http(_url, 'Proyectos/Municipios/GetMunicipios', {});
     final response = await http.get(url);
     final List<dynamic>decodedData = json.decode(response.body);
     final List<MunicipioModel> municipios = [];
