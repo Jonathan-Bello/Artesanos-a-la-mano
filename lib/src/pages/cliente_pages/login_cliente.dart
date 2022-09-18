@@ -184,8 +184,10 @@ class _LoginClienteState extends State<LoginCliente> {
           ),
           onPressed: snapshot.hasData && _cargando == false
               ? () async {
-                  mostrarCarga(context);
+                  // show mostrarCarga(context) and close it in the end
+                  // var funcEnd = mostrarCarga(context);
                   await _login(bloc, context);
+                  // close the dialog
                 }
               : null,
         );
@@ -212,7 +214,7 @@ class _LoginClienteState extends State<LoginCliente> {
         productosBloc.cargarProductosRecientes(id);
         //_cargando=false;
       } else {
-        _crearAlert(context);
+        _crearAlert(context, estatus);
       }
     });
 
@@ -230,28 +232,30 @@ class _LoginClienteState extends State<LoginCliente> {
     pref.setInt(key, id);
   }
 
-  Future<void> _crearAlert(BuildContext context) {
+  Future<void> _crearAlert(BuildContext context, String status) {
     return showDialog<void>(
-        context: context,
-        builder: (BuildContext c) {
-          return AlertDialog(
-            title: Text(
-              'Error',
-              style: TextStyle(fontSize: 25.0),
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Usuario o contraseña incorrectos'),
+              ],
             ),
-            content: Text('Por favor, inténtelo de nuevo'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Aceptar'),
-                style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                        TextStyle(color: Colors.blueAccent))),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          );
-        });
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Aceptar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

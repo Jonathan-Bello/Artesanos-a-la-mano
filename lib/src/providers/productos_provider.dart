@@ -79,7 +79,7 @@ class ProductosProvider {
       'foto': producto.foto.toString(),
       'idtienda': producto.idArtesano.toString(),
     });
-    //print(url);
+    print(url);
     final response = await http.get(url);
     final decodedData = json.decode(response.body);
     print(decodedData);
@@ -332,7 +332,6 @@ class ProductosProvider {
 
     print(decodedData[0]);
     return decodedData[0];
-
     // decodedData.forEach( (item){
     //   final prodTemp = ProductoModel.fromJson(item);
     //   productos.add(prodTemp);

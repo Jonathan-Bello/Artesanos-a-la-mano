@@ -99,7 +99,6 @@ class _ListaProductosState extends State<ListaProductos> {
   Future<void> refresh()async{
     final productosBloc= Provider.ofProduc(context);
     productosBloc.cargarProductos(_usuarioId,1);
-    
     //Para que espere a que se vea la animación
     return Future.delayed(const Duration(milliseconds: 1000), () {
       return;

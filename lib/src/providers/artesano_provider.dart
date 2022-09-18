@@ -14,11 +14,11 @@ class ArtesanoProvider {
     final response = await http.get(url);
     final decodedData = json.decode(response.body);
     final ArtesanosModel artesanosModel = ArtesanosModel.fromJson(decodedData);
-    //print(decodedData);
+    print(decodedData);
     return artesanosModel;
   }
 
-  //Editar Prodcutoq  
+  //Editar Prodcuto
   Future<bool> editarArtesano(ArtesanosModel artesano) async {
     final url = Uri.http(_url, 'Proyectos/Artesanos/ActualizarArtesano', {
       'id': artesano.id.toString(),
@@ -36,7 +36,7 @@ class ArtesanoProvider {
       //'region' : artesano.region.toString(),
       'referencias': artesano.referencias.toString()
     });
-    //print(url);
+    print(url);
     final response = await http.get(url);
     final decodedData = json.decode(response.body);
     print(decodedData);

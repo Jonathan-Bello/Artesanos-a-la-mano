@@ -21,7 +21,7 @@ class _ProductoPageState extends State<ProductoPage> {
   bool _guardando = false;
   File foto;
   final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Preferencias de Ususario
   final prefs = new PreferenciasUsuario();
@@ -113,7 +113,7 @@ class _ProductoPageState extends State<ProductoPage> {
                       ),
                       _crearPrecio(),
                       _crearDisponible(),
-                      // _crearCategorias(),
+                      _crearCategorias(),
                       _crearDecripcion(),
                       _crearBoton(),
                     ],
@@ -236,16 +236,27 @@ class _ProductoPageState extends State<ProductoPage> {
     });
   }
 
-  void mostrarSnackbar(String mensaje) {
+  // void mostrarSnackbar(String mensaje) {
+  //   final snackbar = new SnackBar(
+  //     content: Text(mensaje),
+  //     duration: Duration(milliseconds: 1000),
+  //     action: SnackBarAction(
+  //         label: 'VOLVER',
+  //         onPressed: () => Navigator.pop(context, 'MenuArtesano')),
+  //   );
+  //   scaffoldKey.currentState.showSnackBar(snackbar);
+  // }
+
+    void mostrarSnackbar(String mensaje) {
     final snackbar = new SnackBar(
       content: Text(mensaje),
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 1500),
       action: SnackBarAction(
           label: 'VOLVER',
           onPressed: () => Navigator.pop(context, 'MenuArtesano')),
     );
     scaffoldKey.currentState.showSnackBar(snackbar);
-  }
+    }
 
   Widget _crearDisponible() {
     bool aux = false;
@@ -304,9 +315,11 @@ class _ProductoPageState extends State<ProductoPage> {
             items: getOpcionesDropDown(),
             onChanged: (opt) {
               setState(() {
+                // asignar como valor el index de la lista
                 _opcionSelecionada = opt;
                 producto.categoria = opt.toString();
                 FocusScope.of(context).requestFocus(FocusNode());
+
               });
             })
       ],

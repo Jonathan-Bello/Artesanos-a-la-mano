@@ -1,5 +1,5 @@
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:artesanos_a_la_mano/src/bloc/provider_bloc.dart';
@@ -496,7 +496,6 @@ class _PerfilArtesanoPageState extends State<PerfilArtesanoPage> {
   }
 
   //Subir Datos
-
   Widget _crearBoton() {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
@@ -521,10 +520,11 @@ class _PerfilArtesanoPageState extends State<PerfilArtesanoPage> {
     setState(() {
       _guardando = true;
     });
-    artesanoBloc.changeStreamArtesano(null);
-    await artesanoBloc.editarArtesano(artesano);
-    //artesanoProvider.editarArtesano(artesano);
 
+    log("Artesano: " + (artesano.toJson()).toString());
+
+    // artesanoBloc.changeStreamArtesano(null);
+    // await artesanoBloc.editarArtesano(artesano);
     setState(() {
       //_guardando=false;
       mostrarSnackbar('Información guardada');

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:artesanos_a_la_mano/src/bloc/artesano_bloc.dart';
 import 'package:artesanos_a_la_mano/src/bloc/provider_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:artesanos_a_la_mano/src/widgets/fondos_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:artesanos_a_la_mano/src/share_prefs/preferencias_usuario.dart';
 import 'package:artesanos_a_la_mano/src/widgets/drawer_artesano_widget.dart';
+import 'package:artesanos_a_la_mano/src/providers/productos_provider.dart';
 
 class ArtesanoPage extends StatefulWidget {
   @override
@@ -15,8 +18,7 @@ class ArtesanoPage extends StatefulWidget {
 }
 
 class _ArtesanoPageState extends State<ArtesanoPage> {
-//Preferencias de Ususario
-
+  //Preferencias de Ususario
   final prefs = new PreferenciasUsuario();
   int _usuarioId;
   ArtesanoBloc artesanoBloc;
@@ -78,7 +80,7 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
           //     _crearProductoLkesStream(productoBloc),
           //   ],
           // ),
-          // drawer: _drawerArtesano(artesanoBloc),
+          drawer: _drawerArtesano(artesanoBloc),
         )
       ]),
     );
@@ -210,16 +212,18 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
   }
 
   Widget _crearItem(BuildContext context, Map<String, dynamic> producto) {
+    final ProductosProvider productosProvider = new ProductosProvider();
     final _screenSize = MediaQuery.of(context).size;
     ProductoModel productox = new ProductoModel();
     productox.idProducto = producto['id'];
     productox.producto = producto['producto'];
     productox.descripcion = producto['descripcion'];
-    productox.disponibilidad = int.parse(producto['disponibilidad']);
+    productox.disponibilidad = (producto['disponibilidad']);
     productox.foto = producto['foto'];
     productox.categoria = producto['categoria'];
-    productox.precio = double.parse(producto['precio']);
+    productox.precio = (producto['precio']);
     productox.idArtesano = prefs.id;
+
     return Container(
         color: Colors.brown,
         child: Card(
@@ -236,7 +240,7 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: (producto['Foto'] == "null")
+                      child: (productox.foto == "null")
                           ? Image(
                               image: AssetImage('assets/img/imagenNull.png'),
                               height: 300.0,
@@ -244,7 +248,7 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                               fit: BoxFit.cover,
                             )
                           : FadeInImage(
-                              image: NetworkImage(producto['Foto']),
+                              image: NetworkImage(productox.foto),
                               placeholder: AssetImage('assets/img/loading.gif'),
                               height: 300.0,
                               width: _screenSize.width * .5,
@@ -257,14 +261,14 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              "   Nombre: " + producto['Producto'],
+                              "   Nombre: " + productox.producto,
                               overflow: TextOverflow.clip,
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             Text('Disponibilidad'),
-                            (int.parse(producto['Disponibilidad']) == 1)
+                            ((productox.disponibilidad) == 1)
                                 ? Icon(
                                     Icons.check_circle,
                                     color: Colors.green,
@@ -279,14 +283,14 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                               height: 20,
                             ),
                             Text(
-                              "   Categoría: " + producto['Categoria'],
+                              "   Categoría: " + productox.categoria,
                               overflow: TextOverflow.clip,
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             Text(
-                              "   Precio: \u0024${producto['Precio']}",
+                              "   Precio: \u0024${productox.precio}",
                               overflow: TextOverflow.clip,
                             ),
                             SizedBox(
@@ -303,9 +307,22 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Text(
-                                  '${producto['NoLikes']}',
-                                  overflow: TextOverflow.clip,
+                                FutureBuilder(
+                                  future: productosProvider.getLikesdeProducto(
+                                      (productox.idProducto)),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Text(
+                                        '${snapshot.data.toString()}',
+                                        overflow: TextOverflow.clip,
+                                      );
+                                    } else {
+                                      return Center(
+                                          //child: CircularProgressIndicator()
+                                          );
+                                    }
+                                  },
                                 ),
                               ],
                             ),
@@ -314,7 +331,7 @@ class _ArtesanoPageState extends State<ArtesanoPage> {
                   ],
                 )),
                 subtitle: Text(
-                  "Descripción: " + producto['Descripcion'],
+                  "Descripción: " + productox.descripcion,
                   style: TextStyle(
                       //fontSize: 10
                       ),

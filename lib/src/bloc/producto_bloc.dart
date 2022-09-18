@@ -7,8 +7,6 @@ import 'package:rxdart/rxdart.dart';
 class ProductosBloc{
   final _productosProvider = new ProductosProvider();
 
-
-
   final _productosController = new BehaviorSubject<List<ProductoModel>>();
   Stream<List<ProductoModel>> get productosStream => _productosController.stream;
   Function(List<ProductoModel>) get changeStreamProductos   => _productosController.sink.add;
